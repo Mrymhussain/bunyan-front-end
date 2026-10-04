@@ -10,6 +10,14 @@ The aim of BUNYAN is to make the process of building, renovating, or finding the
 
 ---
 
+## Back-End Application
+
+The FastAPI back-end and API endpoints can be viewed here:
+
+[BUNYAN Back-End](https://github.com/Mrymhussain/bunyan-back-end)
+
+---
+
 ## Getting Started
 
 ### Deployed App
@@ -22,13 +30,13 @@ The wireframes were planned and created using Excalidraw.
 
 [View Excalidraw](https://excalidraw.com/)
 
-### Back-End Repository
-
-[BUNYAN Back-End](https://github.com/Mrymhussain/bunyan-back-end)
-
 ### Front-End Repository
 
 [BUNYAN Front-End](https://github.com/Mrymhussain/bunyan-front-end)
+
+### Back-End Repository
+
+[BUNYAN Back-End](https://github.com/Mrymhussain/bunyan-back-end)
 
 ---
 
@@ -157,106 +165,6 @@ The component hierarchy shows how the front-end application is planned and how t
 
 ---
 
-## Back-End Routes / Endpoints
-
-### Authentication
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| POST | `/auth/signup` | Create an account |
-| POST | `/auth/signin` | Sign in |
-| GET | `/auth/me` | Get the current user |
-
-### Users
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/users` | Get users |
-| GET | `/users/{user_id}` | Get one user |
-| PUT | `/users/{user_id}` | Update user |
-| DELETE | `/users/{user_id}` | Delete user |
-
-Users can later be filtered by role or specialty.
-
-### Projects
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/projects` | Get projects |
-| POST | `/projects` | Create project |
-| GET | `/projects/{project_id}` | Get project details |
-| PUT | `/projects/{project_id}` | Update project |
-| DELETE | `/projects/{project_id}` | Delete project |
-
-### Project Members
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/projects/{project_id}/members` | Get project members |
-| POST | `/projects/{project_id}/members` | Add project member |
-| DELETE | `/projects/{project_id}/members/{member_id}` | Remove project member |
-
-### Consultations
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/consultations` | Get consultations |
-| POST | `/consultations` | Create consultation |
-| GET | `/consultations/{consultation_id}` | Get consultation |
-| PUT | `/consultations/{consultation_id}` | Update consultation |
-| DELETE | `/consultations/{consultation_id}` | Cancel consultation |
-
-### Service Categories
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/service-categories` | Get service categories |
-| POST | `/service-categories` | Create category |
-| PUT | `/service-categories/{category_id}` | Update category |
-| DELETE | `/service-categories/{category_id}` | Delete category |
-
-### Service Requests
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/service-requests` | Get service requests |
-| POST | `/service-requests` | Create service request |
-| GET | `/service-requests/{request_id}` | Get service request |
-| PUT | `/service-requests/{request_id}` | Update service request |
-| DELETE | `/service-requests/{request_id}` | Cancel service request |
-
-### Materials
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/materials` | Get materials |
-| POST | `/materials` | Add material |
-| GET | `/materials/{material_id}` | Get material |
-| PUT | `/materials/{material_id}` | Update material |
-| DELETE | `/materials/{material_id}` | Delete material |
-
-### Orders
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/orders` | Get orders |
-| POST | `/orders` | Create order |
-| GET | `/orders/{order_id}` | Get order |
-| PUT | `/orders/{order_id}` | Update order |
-| DELETE | `/orders/{order_id}` | Cancel order |
-
-### Reviews
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| GET | `/reviews` | Get reviews |
-| POST | `/reviews` | Create review |
-| GET | `/reviews/{review_id}` | Get review |
-| PUT | `/reviews/{review_id}` | Update review |
-| DELETE | `/reviews/{review_id}` | Delete review |
-
----
-
 ## Wireframes
 
 The main screens planned for BUNYAN are:
@@ -272,7 +180,7 @@ The main screens planned for BUNYAN are:
 9. Professionals
 10. Services & Materials
 
-The wireframes were created in Excalidraw.
+The wireframes were created using Excalidraw.
 
 [Excalidraw](https://excalidraw.com/)
 
@@ -282,8 +190,10 @@ The wireframes were created in Excalidraw.
 
 The tools used so far for planning and setting up the project are:
 
-
-
+- Git
+- GitHub
+- Visual Studio Code
+- Excalidraw
 
 ---
 
