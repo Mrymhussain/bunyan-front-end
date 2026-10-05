@@ -11,6 +11,10 @@ import ConsultationDetails from './components/Consultations/ConsultationDetails'
 import Consultations from './components/Consultations/Consultations';
 import EditConsultation from './components/Consultations/EditConsultation';
 
+import Materials from './components/Materials/Materials';
+import MaterialDetails from './components/Materials/MaterialDetails';
+import NewMaterial from './components/Materials/NewMaterial';
+
 import ConsultationForm from './components/Professionals/ConsultationForm';
 import EngineerProfile from './components/Professionals/EngineerProfile';
 import Professionals from './components/Professionals/Professionals';
@@ -128,6 +132,21 @@ const App = () => {
         <Route
           path="/service-requests/:requestId/edit"
           element={user ? <EditServiceRequest /> : <Landing />}
+        />
+
+        <Route
+          path="/materials"
+          element={user ? <Materials /> : <Landing />}
+        />
+
+         <Route
+         path="/materials/:materialId"
+         element={user ? <MaterialDetails /> : <Landing />}
+         />
+
+         <Route
+         path="/materials/new"
+        element={user ? <NewMaterial /> : <Landing />}
         />
       </Routes>
     </>
