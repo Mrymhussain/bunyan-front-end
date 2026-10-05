@@ -18,6 +18,10 @@ import ConsultationForm from './components/Professionals/ConsultationForm';
 import Consultations from './components/Consultations/Consultations';
 import ConsultationDetails from './components/Consultations/ConsultationDetails';
 import EditConsultation from './components/Consultations/EditConsultation';
+import Services from './components/Services/Services';
+import SpecialistProfile from './components/Services/SpecialistProfile';
+import ServiceRequestForm from './components/Services/ServiceRequestForm';
+import ServiceRequests from './components/ServiceRequests/ServiceRequests';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -80,6 +84,26 @@ const App = () => {
        path="/consultations/:consultationId/edit"
        element={user ? <EditConsultation /> : <Landing />}
       />
+
+       <Route
+       path="/services"
+       element={user ? <Services /> : <Landing />}
+       />
+
+     <Route
+     path="/specialists/:specialistId"
+     element={user ? <SpecialistProfile /> : <Landing />}
+     />
+
+    <Route
+    path="/specialists/:specialistId/request"
+    element={user ? <ServiceRequestForm /> : <Landing />}
+    />
+
+   <Route
+   path="/service-requests"
+   element={user ? <ServiceRequests /> : <Landing />}
+   />
 
         <Route
           path="/engineers/:engineerId"
