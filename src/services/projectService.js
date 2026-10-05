@@ -20,6 +20,28 @@ const getProjects = async () => {
   return data;
 };
 
+const createProject = async (projectData) => {
+  const token = getToken();
+
+  const res = await fetch(`${BASE_URL}/projects`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(projectData),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.detail || 'Unable to create project');
+  }
+
+  return data;
+};
+
 export {
   getProjects,
+  createProject,
 };
