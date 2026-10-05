@@ -1,106 +1,177 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
-// Services
 import * as authService from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
-
+import '../Auth.css';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+
   const [message, setMessage] = useState('');
+
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
+    phone: '',
     password: '',
     passwordConf: '',
   });
-  const { setUser } = useContext(UserContext);
 
-  const { username, email, password, passwordConf } = formData;
+  const {
+    name,
+    email,
+    phone,
+    password,
+    passwordConf,
+  } = formData;
 
   const handleChange = (evt) => {
     setMessage('');
-    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+
+    setFormData({
+      ...formData,
+      [evt.target.name]: evt.target.value,
+    });
   };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const payload = { username, email, password };
-    const user = await authService.signUp(payload)
+    if (password !== passwordConf) {
+      setMessage('Passwords do not match');
+      return;
+    }
 
-    setUser(user); // this line will print the form data to the console
-    navigate('/')
+    try {
+      const user = await authService.signUp({
+        name,
+        email,
+        phone,
+        password,
+      });
+
+      setUser(user);
+      navigate('/');
+    } catch (err) {
+      setMessage(err.message);
+    }
   };
 
   const isFormInvalid = () => {
-    return !(username && email && password && password === passwordConf);
+    return !(
+      name &&
+      email &&
+      password &&
+      passwordConf &&
+      password === passwordConf
+    );
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
-      <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        {/* Username Field */}
-        <div>
-          <label htmlFor='username'>Username:</label>
-          <input
-            type='text'
-            id='username'
-            value={username}
-            name='username'
-            onChange={handleChange}
-            required
-          />
+    <main className="auth-page">
+      <section className="auth-container">
+        <div className="auth-header">
+          <h1>Create your account</h1>
+          <p>Join BUNYAN and start managing your property needs.</p>
         </div>
 
-        {/* Email Field */}
-        <div>
-          <label htmlFor='email'>Email:</label>
-          <input
-            type='email'
-            id='email'
-            value={email}
-            name='email'
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {message && (
+          <p className="auth-message">{message}</p>
+        )}
 
-        {/* Password Field */}
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            id='password'
-            value={password}
-            name='password'
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="auth-field">
+            <label htmlFor="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={name}
+              onChange={handleChange}
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
 
-        {/* Coinfirm Password */}
-        <div>
-          <label htmlFor='confirm'>Confirm Password:</label>
-          <input
-            type='password'
-            id='confirm'
-            value={passwordConf}
-            name='passwordConf'
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="auth-field">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
 
-        {/* Form Actions */}
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+          <div className="auth-field">
+            <label htmlFor="phone">Phone</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={phone}
+              onChange={handleChange}
+              placeholder="Enter your phone number"
+            />
+          </div>
+
+          <div className="auth-field">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              placeholder="Create a password"
+              required
+            />
+          </div>
+
+          <div className="auth-field">
+            <label htmlFor="passwordConf">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="passwordConf"
+              name="passwordConf"
+              value={passwordConf}
+              onChange={handleChange}
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+
+          <div className="auth-actions">
+            <button
+              type="submit"
+              className="auth-submit"
+              disabled={isFormInvalid()}
+            >
+              Sign Up
+            </button>
+
+            <button
+              type="button"
+              className="auth-cancel"
+              onClick={() => navigate('/')}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <div className="auth-footer">
+          Already have an account?{' '}
+          <Link to="/sign-in">Sign in</Link>
         </div>
-      </form>
+      </section>
     </main>
   );
 };

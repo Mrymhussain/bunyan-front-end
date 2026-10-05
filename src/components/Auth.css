@@ -1,0 +1,120 @@
+.auth-page {
+    min-height: calc(100vh - 76px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    background-color: var(--off-white);
+  }
+  
+  .auth-container {
+    width: 100%;
+    max-width: 460px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .auth-header h1 {
+    color: var(--green-dark);
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  
+  .auth-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  
+  .auth-field label {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .auth-message {
+    background-color: #fff3f1;
+    color: #a33a2b;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+  }
+  
+  .auth-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  
+  .auth-actions button {
+    flex: 1;
+  }
+  
+  .auth-submit {
+    background-color: var(--green-dark);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+  
+  .auth-submit:hover {
+    background-color: var(--green);
+  }
+  
+  .auth-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .auth-cancel {
+    background-color: transparent;
+    color: var(--green-dark);
+    border: 1px solid var(--green-dark);
+    padding: 11px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+  }
+  
+  .auth-footer {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  
+  .auth-footer a {
+    color: var(--green);
+    font-weight: 600;
+  }
+  
+  @media (max-width: 520px) {
+    .auth-container {
+      padding: 30px 22px;
+    }
+  
+    .auth-actions {
+      flex-direction: column;
+    }
+  }
