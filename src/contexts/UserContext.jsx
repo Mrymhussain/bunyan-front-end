@@ -1,19 +1,28 @@
-import { createContext, useState } from 'react';
-import { getUserFromToken } from '../lib/helpers/jwt-helpers';
+import { createContext, useEffect, useState } from 'react';
+import { getCurrentUser } from '../services/userService';
 
 const UserContext = createContext();
 
-function UserProvider({ children }) {
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
- const [user, setUser] = useState(getUserFromToken())
+  useEffect(() => {
+    const loadUser = async () => {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    };
 
- const value = { user, setUser }
+    loadUser();
+  }, []);
 
   return (
-    <UserContext.Provider value={value}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-export { UserProvider, UserContext };
+export {
+  UserContext,
+  UserProvider,
+};

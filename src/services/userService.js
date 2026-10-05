@@ -1,30 +1,46 @@
-// THIS IS A DEMO OF AN AUTHENTICATED FETCH REQUEST
+import {
+  getToken,
+  parseToken,
+  removeToken,
+} from '../lib/helpers/jwt-helpers';
 
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
+const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
-const currentUser = async () => {
+const getCurrentUser = async () => {
+  const token = getToken();
+
+  if (!token) {
+    return null;
+  }
+
+  const payload = parseToken(token);
+
+  if (!payload || !payload.sub) {
+    removeToken();
+    return null;
+  }
+
   try {
-    const config = {
+    const res = await fetch(`${BASE_URL}/users/${payload.sub}`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    }
-    const res = await fetch(`${BASE_URL}/current_user`, config);
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-    const data = await res.json();
-
-    if (data.detail) {
-      throw new Error(data.detail);
+    if (!res.ok) {
+      removeToken();
+      return null;
     }
 
-    return data
-  } catch (err) {
-    console.log(err);
-    throw new Error(err, { cause: err });
+    return await res.json();
+  } catch {
+    return null;
   }
 };
 
+const currentUser = getCurrentUser;
 
 export {
+  getCurrentUser,
   currentUser,
 };

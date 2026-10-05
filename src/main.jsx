@@ -1,12 +1,11 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router'
-import './index.css'
-import App from './App.jsx'
-import { UserProvider } from './contexts/UserContext.jsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router';
 
-// Wrap the App component with the BrowserRouter component to enable
-// enable route handling throughout your application.
+import App from './App.jsx';
+import { UserProvider } from './contexts/UserContext.jsx';
+import './index.css';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -14,5 +13,5 @@ createRoot(document.getElementById('root')).render(
         <App />
       </UserProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);

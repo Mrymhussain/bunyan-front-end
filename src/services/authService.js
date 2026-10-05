@@ -1,67 +1,72 @@
-// src/services/authService.js
+import {
+  parseToken,
+  registerToken,
+} from '../lib/helpers/jwt-helpers';
 
-import { parseToken, registerToken } from "../lib/helpers/jwt-helpers";
+const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
-// Use the `VITE_BACK_END_SERVER_URL` environment variable to set the base URL.
-// Note the `/auth` path added to the server URL that forms the base URL for
-// all the requests in this service.
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
+
+const getUser = async (token) => {
+  const payload = parseToken(token);
+  const userId = payload.sub;
+
+  const res = await fetch(`${BASE_URL}/users/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.detail || 'Unable to get user');
+  }
+
+  return data;
+};
+
 
 const signUp = async (formData) => {
-  try {
-    const res = await fetch(`${BASE_URL}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+  const res = await fetch(`${BASE_URL}/auth/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
 
-    const data = await res.json();
+  const data = await res.json();
 
-    if (data.detail) {
-      throw new Error(data.detail);
-    }
-
-    if (data.token) {
-      // first save the raw token in local storage
-      registerToken(data.token)
-      // then extract the payload (second part of the token)
-      return parseToken(data.token)
-    }
-
-    throw new Error('Invalid response from server');
-  } catch (err) {
-    console.log(err);
-    throw new Error(err, { cause: err });
+  if (!res.ok) {
+    throw new Error(data.detail || 'Sign up failed');
   }
+
+  registerToken(data.token);
+
+  return getUser(data.token);
 };
+
 
 const signIn = async (formData) => {
-  try {
-    const res = await fetch(`${BASE_URL}/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+  const res = await fetch(`${BASE_URL}/auth/signin`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
 
-    const data = await res.json();
+  const data = await res.json();
 
-    if (data.detail) {
-      throw new Error(data.detail);
-    }
-
-    if (data.token) {
-      // first save the raw token in local storage
-      registerToken(data.token)
-
-      return parseToken(data.token)
-    }
-
-    throw new Error('Invalid response from server');
-  } catch (err) {
-    console.log(err);
-    throw new Error(err, { cause: err });
+  if (!res.ok) {
+    throw new Error(data.detail || 'Sign in failed');
   }
+
+  registerToken(data.token);
+
+  return getUser(data.token);
 };
+
 
 export {
   signUp,
