@@ -15,29 +15,23 @@ const Dashboard = () => {
       <h1>Welcome, {user.name}</h1>
 
       <p>
-        Manage your projects, consultations, services, materials,
-        and orders from your BUNYAN dashboard.
+        Manage your BUNYAN activity from your dashboard.
       </p>
 
       <section>
         <h2>My Activity</h2>
 
         <div>
-          <Link to="/projects">
-            My Projects
-          </Link>
+          <Link to="/projects">My Projects</Link>
+          <br />
 
-          <Link to="/consultations">
-            Consultations
-          </Link>
+          <Link to="/consultations">Consultations</Link>
+          <br />
 
-          <Link to="/service-requests">
-            Service Requests
-          </Link>
+          <Link to="/service-requests">Service Requests</Link>
+          <br />
 
-          <Link to="/orders">
-            Orders
-          </Link>
+          <Link to="/orders">Orders</Link>
         </div>
       </section>
 
@@ -45,21 +39,16 @@ const Dashboard = () => {
         <h2>Quick Actions</h2>
 
         <div>
-          <Link to="/projects/new">
-            New Project
-          </Link>
+          <Link to="/projects/new">Create New Project</Link>
+          <br />
 
-          <Link to="/professionals">
-            Find Professionals
-          </Link>
+          <Link to="/professionals">Find Professionals</Link>
+          <br />
 
-          <Link to="/services">
-            Request a Service
-          </Link>
+          <Link to="/services">Request a Service</Link>
+          <br />
 
-          <Link to="/materials">
-            Browse Materials
-          </Link>
+          <Link to="/materials">Browse Materials</Link>
         </div>
       </section>
     </main>
