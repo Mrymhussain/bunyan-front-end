@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Landing from './components/Landing/Landing';
 import NavBar from './components/NavBar/NavBar';
 import NewProject from './components/Projects/NewProject';
+import ProjectDetails from './components/Projects/ProjectDetails';
 import Projects from './components/Projects/Projects';
 import SignInForm from './components/SignInForm/SignInForm';
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -43,6 +44,11 @@ const App = () => {
         <Route
           path="/projects/new"
           element={user ? <NewProject /> : <Landing />}
+        />
+
+        <Route
+          path="/projects/:projectId"
+          element={user ? <ProjectDetails /> : <Landing />}
         />
       </Routes>
     </>
