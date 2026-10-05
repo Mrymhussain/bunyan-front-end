@@ -28,6 +28,10 @@ import NewProject from './components/Projects/NewProject';
 import ProjectDetails from './components/Projects/ProjectDetails';
 import Projects from './components/Projects/Projects';
 
+import EditReview from './components/Reviews/EditReview';
+import ReviewForm from './components/Reviews/ReviewForm';
+import Reviews from './components/Reviews/Reviews';
+
 import EditServiceRequest from './components/ServiceRequests/EditServiceRequest';
 import ServiceRequestDetails from './components/ServiceRequests/ServiceRequestDetails';
 import ServiceRequests from './components/ServiceRequests/ServiceRequests';
@@ -172,6 +176,21 @@ const App = () => {
         <Route
           path="/orders/:orderId/edit"
           element={user ? <EditOrder /> : <Landing />}
+        />
+
+        <Route
+          path="/reviews"
+          element={user ? <Reviews /> : <Landing />}
+        />
+
+        <Route
+          path="/reviews/new/:userId"
+          element={user ? <ReviewForm /> : <Landing />}
+        />
+
+        <Route
+          path="/reviews/:reviewId/edit"
+          element={user ? <EditReview /> : <Landing />}
         />
       </Routes>
     </>
