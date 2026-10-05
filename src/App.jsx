@@ -20,6 +20,9 @@ import EditOrder from './components/Orders/EditOrder';
 import OrderDetails from './components/Orders/OrderDetails';
 import Orders from './components/Orders/Orders';
 
+import EditProfile from './components/Profile/EditProfile';
+import Profile from './components/Profile/Profile';
+
 import ConsultationForm from './components/Professionals/ConsultationForm';
 import EngineerProfile from './components/Professionals/EngineerProfile';
 import Professionals from './components/Professionals/Professionals';
@@ -56,6 +59,21 @@ const App = () => {
         <Route
           path="/"
           element={user ? <Dashboard /> : <Landing />}
+        />
+
+        <Route
+          path="/dashboard"
+          element={user ? <Dashboard /> : <Landing />}
+        />
+
+        <Route
+          path="/profile"
+          element={user ? <Profile /> : <Landing />}
+        />
+
+        <Route
+          path="/profile/edit"
+          element={user ? <EditProfile /> : <Landing />}
         />
 
         <Route

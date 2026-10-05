@@ -21,11 +21,14 @@ const getCurrentUser = async () => {
   }
 
   try {
-    const res = await fetch(`${BASE_URL}/users/${payload.sub}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetch(
+      `${BASE_URL}/users/${payload.sub}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (!res.ok) {
       removeToken();
@@ -38,9 +41,31 @@ const getCurrentUser = async () => {
   }
 };
 
+const updateUser = async (userId, userData) => {
+  const token = getToken();
+
+  const res = await fetch(`${BASE_URL}/users/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.detail || 'Unable to update profile');
+  }
+
+  return data;
+};
+
 const currentUser = getCurrentUser;
 
 export {
   getCurrentUser,
   currentUser,
+  updateUser,
 };
