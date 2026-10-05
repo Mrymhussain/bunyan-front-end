@@ -11,9 +11,14 @@ import ConsultationDetails from './components/Consultations/ConsultationDetails'
 import Consultations from './components/Consultations/Consultations';
 import EditConsultation from './components/Consultations/EditConsultation';
 
-import Materials from './components/Materials/Materials';
+import EditMaterial from './components/Materials/EditMaterial';
 import MaterialDetails from './components/Materials/MaterialDetails';
+import Materials from './components/Materials/Materials';
 import NewMaterial from './components/Materials/NewMaterial';
+
+import EditOrder from './components/Orders/EditOrder';
+import OrderDetails from './components/Orders/OrderDetails';
+import Orders from './components/Orders/Orders';
 
 import ConsultationForm from './components/Professionals/ConsultationForm';
 import EngineerProfile from './components/Professionals/EngineerProfile';
@@ -139,14 +144,34 @@ const App = () => {
           element={user ? <Materials /> : <Landing />}
         />
 
-         <Route
-         path="/materials/:materialId"
-         element={user ? <MaterialDetails /> : <Landing />}
-         />
+        <Route
+          path="/materials/new"
+          element={user ? <NewMaterial /> : <Landing />}
+        />
 
-         <Route
-         path="/materials/new"
-        element={user ? <NewMaterial /> : <Landing />}
+        <Route
+          path="/materials/:materialId"
+          element={user ? <MaterialDetails /> : <Landing />}
+        />
+
+        <Route
+          path="/materials/:materialId/edit"
+          element={user ? <EditMaterial /> : <Landing />}
+        />
+
+        <Route
+          path="/orders"
+          element={user ? <Orders /> : <Landing />}
+        />
+
+        <Route
+          path="/orders/:orderId"
+          element={user ? <OrderDetails /> : <Landing />}
+        />
+
+        <Route
+          path="/orders/:orderId/edit"
+          element={user ? <EditOrder /> : <Landing />}
         />
       </Routes>
     </>
