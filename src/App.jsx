@@ -15,6 +15,9 @@ import SignInForm from './components/SignInForm/SignInForm';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import { UserContext } from './contexts/UserContext';
 import ConsultationForm from './components/Professionals/ConsultationForm';
+import Consultations from './components/Consultations/Consultations';
+import ConsultationDetails from './components/Consultations/ConsultationDetails';
+import EditConsultation from './components/Consultations/EditConsultation';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -63,11 +66,27 @@ const App = () => {
          element={user ? <ConsultationForm /> : <Landing />}
          />
 
+         <Route
+         path="/consultations"
+         element={user ? <Consultations /> : <Landing />}
+         />
+
+        <Route
+        path="/consultations/:consultationId"
+        element={user ? <ConsultationDetails /> : <Landing />}
+        />    
+
+       <Route
+       path="/consultations/:consultationId/edit"
+       element={user ? <EditConsultation /> : <Landing />}
+      />
+
         <Route
           path="/engineers/:engineerId"
           element={user ? <EngineerProfile /> : <Landing />}
         />
       </Routes>
+      
     </>
   );
 };
