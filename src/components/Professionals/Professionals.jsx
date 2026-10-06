@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 
 import { getProfessionals } from '../../services/professionalService';
 
+import './Professionals.css';
+
 const Professionals = () => {
   const [professionals, setProfessionals] = useState([]);
   const [message, setMessage] = useState('');
@@ -21,35 +23,90 @@ const Professionals = () => {
   }, []);
 
   return (
-    <main>
-      <h1>Professionals</h1>
+    <main className="professionals-page">
+      <section className="professionals-header">
+        <p className="professionals-label">
+          BUNYAN Professionals
+        </p>
 
-      <p>
-        Find engineers and request a consultation.
-      </p>
+        <h1>Find an Engineer</h1>
 
-      {message && <p>{message}</p>}
+        <p>
+          Browse engineering professionals and find the right
+          expertise for your project or consultation.
+        </p>
+      </section>
+
+      {message && (
+        <p className="professionals-message">
+          {message}
+        </p>
+      )}
 
       {professionals.length === 0 ? (
-        <p>No engineers available.</p>
+        <section className="professionals-empty">
+          <div className="professionals-empty-icon">
+            B
+          </div>
+
+          <h2>No professionals available</h2>
+
+          <p>
+            There are currently no engineers available.
+            Please check again later.
+          </p>
+        </section>
       ) : (
-        <div>
+        <section className="professionals-grid">
           {professionals.map((professional) => (
-            <div key={professional.id}>
-              <h2>{professional.name}</h2>
+            <article
+              key={professional.id}
+              className="professional-card"
+            >
+              <div className="professional-card-top">
+                <div className="professional-avatar">
+                  {professional.name
+                    ?.charAt(0)
+                    .toUpperCase()}
+                </div>
 
-              <p>
-                Specialty: {professional.specialty || 'Not specified'}
-              </p>
+                <span className="professional-specialty">
+                  {professional.specialty || 'Engineer'}
+                </span>
+              </div>
 
-              <p>{professional.email}</p>
+              <div className="professional-card-content">
+                <p className="professional-role">
+                  Professional
+                </p>
 
-              <Link to={`/engineers/${professional.id}`}>
-                View Profile
-              </Link>
-            </div>
+                <h2>{professional.name}</h2>
+
+                <p className="professional-email">
+                  {professional.email}
+                </p>
+              </div>
+
+              <div className="professional-card-footer">
+                <div>
+                  <span>Specialty</span>
+
+                  <strong>
+                    {professional.specialty ||
+                      'Not specified'}
+                  </strong>
+                </div>
+
+                <Link
+                  to={`/engineers/${professional.id}`}
+                >
+                  View Profile
+                  <span>→</span>
+                </Link>
+              </div>
+            </article>
           ))}
-        </div>
+        </section>
       )}
     </main>
   );
