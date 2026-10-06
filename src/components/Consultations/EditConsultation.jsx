@@ -6,6 +6,8 @@ import {
   updateConsultation,
 } from '../../services/consultationService';
 
+import '../Professionals/ConsultationForm.css';
+
 const EditConsultation = () => {
   const { consultationId } = useParams();
   const navigate = useNavigate();
@@ -62,73 +64,121 @@ const EditConsultation = () => {
   };
 
   return (
-    <main>
-      <h1>Edit Consultation</h1>
+    <main className="consultation-form-page">
+      <section className="consultation-form-header">
+        <p className="consultation-form-label">
+          Manage Consultation
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Edit Consultation</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="topic">Topic</label>
-          <input
-            type="text"
-            id="topic"
-            name="topic"
-            value={formData.topic}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <p>
+          Update the consultation topic, schedule,
+          and meeting type.
+        </p>
+      </section>
 
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
+      <section className="consultation-form-card">
+        {message && (
+          <p className="consultation-form-message">
+            {message}
+          </p>
+        )}
 
-        <div>
-          <label htmlFor="scheduled_at">Date and Time</label>
-          <input
-            type="datetime-local"
-            id="scheduled_at"
-            name="scheduled_at"
-            value={formData.scheduled_at}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="meeting_type">Meeting Type</label>
-
-          <select
-            id="meeting_type"
-            name="meeting_type"
-            value={formData.meeting_type}
-            onChange={handleChange}
-          >
-            <option value="online">Online</option>
-            <option value="in_person">In Person</option>
-          </select>
-        </div>
-
-        <button type="submit">
-          Save Changes
-        </button>
-
-        <button
-          type="button"
-          onClick={() =>
-            navigate(`/consultations/${consultationId}`)
-          }
+        <form
+          className="consultation-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="consultation-form-field">
+            <label htmlFor="topic">
+              Consultation Topic
+            </label>
+
+            <input
+              type="text"
+              id="topic"
+              name="topic"
+              value={formData.topic}
+              onChange={handleChange}
+              placeholder="Consultation topic"
+              required
+            />
+          </div>
+
+          <div className="consultation-form-field">
+            <label htmlFor="description">
+              Description
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Describe the consultation..."
+              rows="5"
+            />
+          </div>
+
+          <div className="consultation-form-row">
+            <div className="consultation-form-field">
+              <label htmlFor="scheduled_at">
+                Date and Time
+              </label>
+
+              <input
+                type="datetime-local"
+                id="scheduled_at"
+                name="scheduled_at"
+                value={formData.scheduled_at}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="consultation-form-field">
+              <label htmlFor="meeting_type">
+                Meeting Type
+              </label>
+
+              <select
+                id="meeting_type"
+                name="meeting_type"
+                value={formData.meeting_type}
+                onChange={handleChange}
+              >
+                <option value="online">
+                  Online
+                </option>
+
+                <option value="in_person">
+                  In Person
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div className="consultation-form-actions">
+            <button
+              type="submit"
+              className="consultation-form-submit"
+            >
+              Save Changes
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="consultation-form-cancel"
+              onClick={() =>
+                navigate(`/consultations/${consultationId}`)
+              }
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };

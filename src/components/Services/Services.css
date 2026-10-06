@@ -1,0 +1,282 @@
+.services-page {
+    width: min(1220px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 55px 0 80px;
+  }
+  
+  .services-header {
+    max-width: 700px;
+    margin-bottom: 45px;
+  }
+  
+  .services-label {
+    margin: 0 0 8px;
+    color: var(--burgundy);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  
+  .services-header h1 {
+    margin: 0 0 10px;
+    color: var(--charcoal);
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    letter-spacing: -0.055em;
+  }
+  
+  .services-header > p:last-child {
+    max-width: 620px;
+    margin: 0;
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  
+  .services-message {
+    margin-bottom: 25px;
+    padding: 12px 14px;
+    background: #fff1f3;
+    border: 1px solid #e7bcc4;
+    border-radius: 10px;
+    color: var(--burgundy);
+    font-size: 0.8rem;
+  }
+  
+  .service-categories-section {
+    margin-bottom: 55px;
+  }
+  
+  .specialists-section {
+    margin-bottom: 20px;
+  }
+  
+  .services-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 22px;
+  }
+  
+  .services-section-heading p {
+    margin: 0 0 6px;
+    color: var(--burgundy);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  
+  .services-section-heading h2 {
+    margin: 0;
+    color: var(--charcoal);
+    font-size: 1.6rem;
+  }
+  
+  .service-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  
+  .service-category-card {
+    min-height: 170px;
+    padding: 22px;
+    background: #f8f2f3;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .service-category-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--pink);
+  }
+  
+  .service-category-card > span {
+    display: block;
+    margin-bottom: 30px;
+    color: var(--burgundy);
+    font-size: 0.66rem;
+    font-weight: 700;
+  }
+  
+  .service-category-card h3 {
+    margin: 0 0 8px;
+    color: var(--charcoal);
+    font-size: 1rem;
+  }
+  
+  .service-category-card p {
+    margin: 0;
+    color: var(--gray);
+    font-size: 0.74rem;
+    line-height: 1.6;
+  }
+  
+  .specialists-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  
+  .specialist-card {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+    animation: specialistReveal 0.5s ease both;
+  }
+  
+  .specialist-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--pink);
+    box-shadow: var(--shadow-md);
+  }
+  
+  @keyframes specialistReveal {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .specialist-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 0 0 38px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  .specialist-avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--burgundy) !important;
+    border: 0 !important;
+    border-radius: 50%;
+    box-shadow: none !important;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  
+  .specialist-badge {
+    max-width: 170px;
+    padding: 6px 10px;
+    background: var(--pink-light);
+    border-radius: 999px;
+    color: var(--burgundy);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .specialist-card-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  .specialist-label {
+    margin: 0 0 6px;
+    color: var(--burgundy);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  
+  .specialist-card-content h3 {
+    margin: 0 0 8px;
+    color: var(--charcoal);
+    font-size: 1.35rem;
+  }
+  
+  .specialist-specialty {
+    margin: 0;
+    color: var(--gray);
+    font-size: 0.76rem;
+  }
+  
+  .specialist-view-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--burgundy);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  
+  .specialist-view-link span {
+    transition: transform 0.2s ease;
+  }
+  
+  .specialist-view-link:hover span {
+    transform: translateX(4px);
+  }
+  
+  .services-empty {
+    padding: 35px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    text-align: center;
+  }
+  
+  .services-empty h3 {
+    margin: 0;
+    color: var(--gray);
+    font-size: 0.85rem;
+  }
+  
+  @media (max-width: 1050px) {
+    .service-categories-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .specialists-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 650px) {
+    .services-page {
+      width: calc(100% - 28px);
+      padding-top: 35px;
+    }
+  
+    .service-categories-grid,
+    .specialists-grid {
+      grid-template-columns: 1fr;
+    }
+  }

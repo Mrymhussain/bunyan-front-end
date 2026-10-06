@@ -6,6 +6,8 @@ import {
   getSpecialists,
 } from '../../services/serviceService';
 
+import './Services.css';
+
 const Services = () => {
   const [categories, setCategories] = useState([]);
   const [specialists, setSpecialists] = useState([]);
@@ -28,50 +30,111 @@ const Services = () => {
   }, []);
 
   return (
-    <main>
-      <h1>Services</h1>
+    <main className="services-page">
+      <section className="services-header">
+        <p className="services-label">
+          BUNYAN Services
+        </p>
 
-      <p>
-        Find specialists for small jobs and property services.
-      </p>
+        <h1>Find the Right Specialist</h1>
 
-      {message && <p>{message}</p>}
+        <p>
+          Browse property services and connect with specialists
+          for smaller jobs and home improvements.
+        </p>
+      </section>
 
-      <section>
-        <h2>Service Categories</h2>
+      {message && (
+        <p className="services-message">
+          {message}
+        </p>
+      )}
+
+      <section className="service-categories-section">
+        <div className="services-section-heading">
+          <div>
+            <p>Service Categories</p>
+            <h2>What do you need help with?</h2>
+          </div>
+        </div>
 
         {categories.length === 0 ? (
-          <p>No service categories available.</p>
+          <div className="services-empty">
+            <h3>No service categories available</h3>
+          </div>
         ) : (
-          <div>
-            {categories.map((category) => (
-              <div key={category.id}>
+          <div className="service-categories-grid">
+            {categories.map((category, index) => (
+              <article
+                key={category.id}
+                className="service-category-card"
+              >
+                <span>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
                 <h3>{category.name}</h3>
-              </div>
+
+                <p>
+                  Explore specialists available for this service.
+                </p>
+              </article>
             ))}
           </div>
         )}
       </section>
 
-      <section>
-        <h2>Specialists</h2>
+      <section className="specialists-section">
+        <div className="services-section-heading">
+          <div>
+            <p>Available Specialists</p>
+            <h2>Connect with a professional</h2>
+          </div>
+        </div>
 
         {specialists.length === 0 ? (
-          <p>No specialists available.</p>
+          <div className="services-empty">
+            <h3>No specialists available</h3>
+          </div>
         ) : (
-          <div>
+          <div className="specialists-grid">
             {specialists.map((specialist) => (
-              <div key={specialist.id}>
-                <h3>{specialist.name}</h3>
+              <article
+                key={specialist.id}
+                className="specialist-card"
+              >
+                <div className="specialist-card-top">
+                  <div className="specialist-avatar">
+                    {specialist.name
+                      ?.charAt(0)
+                      .toUpperCase()}
+                  </div>
 
-                <p>
-                  Specialty: {specialist.specialty || 'Not specified'}
-                </p>
+                  <span className="specialist-badge">
+                    {specialist.specialty || 'Specialist'}
+                  </span>
+                </div>
 
-                <Link to={`/specialists/${specialist.id}`}>
+                <div className="specialist-card-content">
+                  <p className="specialist-label">
+                    BUNYAN Specialist
+                  </p>
+
+                  <h3>{specialist.name}</h3>
+
+                  <p className="specialist-specialty">
+                    {specialist.specialty || 'Not specified'}
+                  </p>
+                </div>
+
+                <Link
+                  to={`/specialists/${specialist.id}`}
+                  className="specialist-view-link"
+                >
                   View Specialist
+                  <span>→</span>
                 </Link>
-              </div>
+              </article>
             ))}
           </div>
         )}
