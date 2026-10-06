@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 
 import { createProject } from '../../services/projectService';
 
+import './ProjectForm.css';
+
 const NewProject = () => {
   const navigate = useNavigate();
 
@@ -37,80 +39,130 @@ const NewProject = () => {
   };
 
   return (
-    <main>
-      <h1>Create New Project</h1>
+    <main className="project-form-page">
+      <section className="project-form-header">
+        <p className="project-form-label">
+          New Project
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Create a Project</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Project Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <p>
+          Tell us about your project and start managing
+          your engineering journey through BUNYAN.
+        </p>
+      </section>
 
-        <div>
-          <label htmlFor="project_type">Project Type</label>
-          <input
-            type="text"
-            id="project_type"
-            name="project_type"
-            value={formData.project_type}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <section className="project-form-card">
+        {message && (
+          <p className="project-form-message">
+            {message}
+          </p>
+        )}
 
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="location">Location</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="budget_range">Budget Range</label>
-          <input
-            type="text"
-            id="budget_range"
-            name="budget_range"
-            value={formData.budget_range}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="submit">
-          Create Project
-        </button>
-
-        <button
-          type="button"
-          onClick={() => navigate('/projects')}
+        <form
+          className="project-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="project-form-field">
+            <label htmlFor="title">
+              Project Title
+            </label>
+
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Example: New Villa Construction"
+              required
+            />
+          </div>
+
+          <div className="project-form-row">
+            <div className="project-form-field">
+              <label htmlFor="project_type">
+                Project Type
+              </label>
+
+              <input
+                type="text"
+                id="project_type"
+                name="project_type"
+                value={formData.project_type}
+                onChange={handleChange}
+                placeholder="Villa, renovation, extension..."
+                required
+              />
+            </div>
+
+            <div className="project-form-field">
+              <label htmlFor="location">
+                Location
+              </label>
+
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="Example: Riffa"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="project-form-field">
+            <label htmlFor="description">
+              Description
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Describe what you want to build or improve..."
+              rows="5"
+            />
+          </div>
+
+          <div className="project-form-field">
+            <label htmlFor="budget_range">
+              Budget Range
+            </label>
+
+            <input
+              type="text"
+              id="budget_range"
+              name="budget_range"
+              value={formData.budget_range}
+              onChange={handleChange}
+              placeholder="Example: BHD 20,000 - 30,000"
+            />
+          </div>
+
+          <div className="project-form-actions">
+            <button
+              type="submit"
+              className="project-form-submit"
+            >
+              Create Project
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="project-form-cancel"
+              onClick={() => navigate('/projects')}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };
