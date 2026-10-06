@@ -3,13 +3,15 @@ import { Link, useNavigate } from 'react-router';
 
 import * as authService from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
-import '../Auth.css';
+
+import './SignUpForm.css';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
   const [message, setMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -53,7 +55,7 @@ const SignUpForm = () => {
       });
 
       setUser(user);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setMessage(err.message);
     }
@@ -70,106 +72,163 @@ const SignUpForm = () => {
   };
 
   return (
-    <main className="auth-page">
-      <section className="auth-container">
-        <div className="auth-header">
-          <h1>Create your account</h1>
-          <p>Join BUNYAN and start managing your property needs.</p>
+    <main className="simple-signup-page">
+      <div className="signup-background">
+        <img
+          src="/images/bunyan-interior.png"
+          alt="Modern interior"
+        />
+      </div>
+
+      <div className="signup-overlay" />
+
+      <section className="simple-signup-card">
+        <Link to="/" className="simple-signup-logo">
+          <img
+            src="/bunyan-logo.png"
+            alt="BUNYAN"
+          />
+        </Link>
+
+        <div className="simple-signup-heading">
+          <p>Join BUNYAN</p>
+
+          <h1>Create account</h1>
+
+          <span>
+            Start managing your property journey in one place.
+          </span>
         </div>
 
         {message && (
-          <p className="auth-message">{message}</p>
+          <p className="simple-signup-message">
+            {message}
+          </p>
         )}
 
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="auth-field">
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={name}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-              required
-            />
+        <form
+          className="simple-signup-form"
+          onSubmit={handleSubmit}
+        >
+          <div className="signup-two-columns">
+            <div className="simple-signup-field">
+              <label htmlFor="name">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={handleChange}
+                placeholder="Your full name"
+                required
+              />
+            </div>
+
+            <div className="simple-signup-field">
+              <label htmlFor="phone">
+                Phone
+              </label>
+
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={phone}
+                onChange={handleChange}
+                placeholder="Phone number"
+              />
+            </div>
           </div>
 
-          <div className="auth-field">
-            <label htmlFor="email">Email</label>
+          <div className="simple-signup-field">
+            <label htmlFor="email">
+              Email
+            </label>
+
             <input
               type="email"
               id="email"
               name="email"
               value={email}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder="you@example.com"
               required
             />
           </div>
 
-          <div className="auth-field">
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={phone}
-              onChange={handleChange}
-              placeholder="Enter your phone number"
-            />
+          <div className="signup-two-columns">
+            <div className="simple-signup-field">
+              <label htmlFor="password">
+                Password
+              </label>
+
+              <div className="signup-password">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="simple-signup-field">
+              <label htmlFor="passwordConf">
+                Confirm Password
+              </label>
+
+              <div className="signup-password">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="passwordConf"
+                  name="passwordConf"
+                  value={passwordConf}
+                  onChange={handleChange}
+                  placeholder="Confirm password"
+                  required
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="auth-field">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              placeholder="Create a password"
-              required
-            />
-          </div>
+          <button
+            type="button"
+            className="signup-show-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? 'Hide passwords' : 'Show passwords'}
+          </button>
 
-          <div className="auth-field">
-            <label htmlFor="passwordConf">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="passwordConf"
-              name="passwordConf"
-              value={passwordConf}
-              onChange={handleChange}
-              placeholder="Confirm your password"
-              required
-            />
-          </div>
-
-          <div className="auth-actions">
-            <button
-              type="submit"
-              className="auth-submit"
-              disabled={isFormInvalid()}
-            >
-              Sign Up
-            </button>
-
-            <button
-              type="button"
-              className="auth-cancel"
-              onClick={() => navigate('/')}
-            >
-              Cancel
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="simple-signup-submit"
+            disabled={isFormInvalid()}
+          >
+            Create Account
+            <span>→</span>
+          </button>
         </form>
 
-        <div className="auth-footer">
-          Already have an account?{' '}
-          <Link to="/sign-in">Sign in</Link>
+        <div className="simple-signup-footer">
+          <p>
+            Already have an account?{' '}
+            <Link to="/sign-in">
+              Sign in
+            </Link>
+          </p>
+
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+          >
+            ← Back home
+          </button>
         </div>
       </section>
     </main>
