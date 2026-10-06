@@ -6,6 +6,8 @@ import {
   updateOrder,
 } from '../../services/orderService';
 
+import './OrderForm.css';
+
 const EditOrder = () => {
   const { orderId } = useParams();
   const navigate = useNavigate();
@@ -59,38 +61,75 @@ const EditOrder = () => {
   };
 
   return (
-    <main>
-      <h1>Edit Order</h1>
+    <main className="order-form-page">
+      <section className="order-form-header">
+        <p className="order-form-label">
+          Order Management
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Edit Order</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="status">
-            Status
-          </label>
+        <p>
+          Update the current status of Order #{orderId}.
+        </p>
+      </section>
 
-          <input
-            type="text"
-            id="status"
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <section className="order-form-card">
+        {message && (
+          <p className="order-form-message">
+            {message}
+          </p>
+        )}
 
-        <button type="submit">
-          Save Changes
-        </button>
-
-        <button
-          type="button"
-          onClick={() => navigate(`/orders/${orderId}`)}
+        <form
+          className="order-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="order-form-field">
+            <label htmlFor="status">
+              Order Status
+            </label>
+
+            <input
+              type="text"
+              id="status"
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              placeholder="Enter order status"
+              required
+            />
+          </div>
+
+          <div className="order-form-summary">
+            <span>Current Total</span>
+
+            <strong>
+              {formData.total_price} BHD
+            </strong>
+          </div>
+
+          <div className="order-form-actions">
+            <button
+              type="submit"
+              className="order-form-submit"
+            >
+              Save Changes
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="order-form-cancel"
+              onClick={() =>
+                navigate(`/orders/${orderId}`)
+              }
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };
