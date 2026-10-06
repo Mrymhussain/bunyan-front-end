@@ -1,23 +1,50 @@
-.dashboard-page {
+.role-dashboard {
   width: min(1220px, calc(100% - 40px));
-
   margin: 0 auto;
   padding: 55px 0 80px;
 }
 
-/* WELCOME */
+/* HEADER */
 
-.dashboard-welcome {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 40px;
-
+.role-dashboard-header {
+  position: relative;
   margin-bottom: 45px;
+  padding: 38px 40px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(121, 45, 57, 0.06),
+      rgba(210, 161, 171, 0.12)
+    );
+
+  border: 1px solid var(--border);
+  border-radius: 22px;
+
+  overflow: hidden;
 }
 
-.dashboard-label {
+.role-dashboard-header::after {
+  content: 'BUNYAN';
+
+  position: absolute;
+  right: -15px;
+  bottom: -38px;
+
+  color: transparent;
+
+  font-size: clamp(5rem, 11vw, 9rem);
+  font-weight: 700;
+
+  letter-spacing: -0.08em;
+
+  -webkit-text-stroke:
+    1px rgba(121, 45, 57, 0.07);
+
+  pointer-events: none;
+}
+
+.dashboard-role-label {
   margin: 0 0 9px;
 
   color: var(--burgundy);
@@ -29,97 +56,64 @@
   text-transform: uppercase;
 }
 
-.dashboard-welcome h1 {
+.role-dashboard-header h1 {
+  position: relative;
+  z-index: 1;
+
   margin-bottom: 10px;
+
+  color: var(--charcoal);
 
   font-size: clamp(2.5rem, 5vw, 4rem);
 
   letter-spacing: -0.055em;
 }
 
-.dashboard-description {
-  max-width: 620px;
+.role-dashboard-header p {
+  position: relative;
+  z-index: 1;
 
-  margin: 0;
+  max-width: 650px;
 }
 
-/* USER */
+.dashboard-specialty {
+  display: inline-block;
 
-.dashboard-user {
-  min-width: 220px;
+  margin: 0 0 10px !important;
+  padding: 7px 11px;
 
-  display: flex;
-  align-items: center;
+  background: var(--pink-light);
 
-  gap: 13px;
+  border-radius: 999px;
 
-  padding: 14px 17px;
+  color: var(--burgundy) !important;
 
-  background: white;
-
-  border: 1px solid var(--border);
-  border-radius: 14px;
-
-  box-shadow: var(--shadow-sm);
-}
-
-.dashboard-user:hover {
-  border-color: var(--pink);
-
-  transform: translateY(-2px);
-}
-
-.dashboard-avatar {
-  width: 44px;
-  height: 44px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  background: var(--burgundy);
-  color: white;
-
+  font-size: 0.72rem;
   font-weight: 700;
 }
 
-.dashboard-user strong {
-  display: block;
+/* GRID */
 
-  color: var(--charcoal);
-
-  font-size: 0.82rem;
-}
-
-.dashboard-user span {
-  display: block;
-
-  margin-top: 3px;
-
-  color: var(--gray);
-
-  font-size: 0.7rem;
-
-  text-transform: capitalize;
-}
-
-/* WORKSPACE CARDS */
-
-.dashboard-main-grid {
+.role-dashboard-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
   gap: 16px;
 
-  margin-bottom: 55px;
+  margin-bottom: 50px;
 }
 
-.workspace-card {
-  min-height: 260px;
+.engineer-grid,
+.admin-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* CARDS */
+
+.role-card {
+  position: relative;
+
+  min-height: 250px;
 
   display: flex;
   flex-direction: column;
@@ -134,13 +128,34 @@
 
   box-shadow: var(--shadow-sm);
 
+  overflow: hidden;
+
   transition:
     transform 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease;
 }
 
-.workspace-card:hover {
+.role-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: var(--burgundy);
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition: transform 0.25s ease;
+}
+
+.role-card:hover {
   transform: translateY(-5px);
 
   border-color: var(--pink);
@@ -148,14 +163,18 @@
   box-shadow: var(--shadow-md);
 }
 
-.workspace-number {
+.role-card:hover::before {
+  transform: scaleX(1);
+}
+
+.role-card > span {
   color: var(--burgundy);
 
   font-size: 0.7rem;
   font-weight: 700;
 }
 
-.workspace-card h2 {
+.role-card h2 {
   margin-bottom: 8px;
 
   color: var(--charcoal);
@@ -163,7 +182,7 @@
   font-size: 1.3rem;
 }
 
-.workspace-card p {
+.role-card p {
   margin: 0;
 
   color: var(--gray);
@@ -172,26 +191,17 @@
   line-height: 1.65;
 }
 
-.workspace-card > strong {
+.role-card strong {
   color: var(--burgundy);
 
   font-size: 0.75rem;
 }
 
-/* LOWER */
-
-.dashboard-lower {
-  display: grid;
-  grid-template-columns: 1.4fr 0.6fr;
-
-  gap: 24px;
-
-  align-items: stretch;
-}
-
 /* QUICK ACTIONS */
 
-.quick-actions {
+.dashboard-quick-section {
+  margin: 0;
+
   padding: 30px;
 
   background: #f8f2f3;
@@ -199,197 +209,149 @@
   border-radius: 22px;
 }
 
-.dashboard-section-title {
-  margin-bottom: 22px;
-}
-
-.dashboard-section-title p {
-  margin: 0 0 6px;
-
-  color: var(--burgundy);
-
-  font-size: 0.68rem;
-  font-weight: 700;
-
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.dashboard-section-title h2 {
-  margin: 0;
+.dashboard-quick-section h2 {
+  margin-bottom: 24px;
 
   color: var(--charcoal);
 
   font-size: 1.55rem;
 }
 
-.quick-actions-list {
+.dashboard-quick-links {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
 
-  gap: 10px;
+  gap: 12px;
 }
 
-.quick-actions-list a {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+.dashboard-quick-links a {
+  min-height: 80px;
+
+  display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  gap: 17px;
-
-  padding: 17px;
+  padding: 18px;
 
   background: white;
 
   border: 1px solid var(--border);
   border-radius: 12px;
 
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.quick-actions-list a:hover {
-  transform: translateX(5px);
-
-  border-color: var(--pink);
-}
-
-.quick-actions-list > a > span {
-  color: var(--burgundy);
-
-  font-size: 0.68rem;
-  font-weight: 700;
-}
-
-.quick-actions-list strong {
   color: var(--charcoal);
 
-  font-size: 0.85rem;
-}
-
-.quick-actions-list p {
-  margin: 3px 0 0;
-
-  color: var(--gray);
-
-  font-size: 0.72rem;
-}
-
-.quick-actions-list b {
-  color: var(--burgundy);
-
-  font-size: 1.1rem;
-
-  transition: transform 0.2s ease;
-}
-
-.quick-actions-list a:hover b {
-  transform: translateX(4px);
-}
-
-/* SIDE CARD */
-
-.dashboard-info-card {
-  margin: 0;
-  padding: 32px;
-
-  background: var(--burgundy);
-
-  border-radius: 22px;
-
-  color: white;
-}
-
-.dashboard-info-label {
-  margin: 0 0 20px;
-
-  color: var(--pink);
-
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   font-weight: 700;
 
-  letter-spacing: 0.16em;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.dashboard-info-card h2 {
-  color: white;
+.dashboard-quick-links a:hover {
+  transform: translateY(-3px);
 
-  font-size: 1.8rem;
-  line-height: 1.2;
+  border-color: var(--pink);
+
+  color: var(--burgundy);
 }
 
-.dashboard-info-card > p:not(.dashboard-info-label) {
-  color: rgba(255, 255, 255, 0.72);
+/* ADMIN */
 
-  font-size: 0.84rem;
+.admin-header {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(41, 40, 42, 0.06),
+      rgba(121, 45, 57, 0.09)
+    );
 }
 
-.dashboard-info-line {
-  height: 1px;
-
-  margin: 25px 0;
-
-  background: rgba(255, 255, 255, 0.18);
+.admin-grid {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.dashboard-info-card a {
-  display: block;
+/* SMALL ENTRANCE ANIMATION */
 
-  padding: 11px 0;
-
-  color: white;
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.12);
-
-  font-size: 0.8rem;
-  font-weight: 600;
+.role-dashboard-header,
+.role-card,
+.dashboard-quick-section {
+  animation: dashboardReveal 0.5s ease both;
 }
 
-.dashboard-info-card a:hover {
-  padding-left: 5px;
+.role-card:nth-child(2) {
+  animation-delay: 0.05s;
+}
 
-  color: var(--pink);
+.role-card:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+.role-card:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.role-card:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.role-card:nth-child(6) {
+  animation-delay: 0.25s;
+}
+
+@keyframes dashboardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* RESPONSIVE */
 
-@media (max-width: 1000px) {
-  .dashboard-main-grid {
+@media (max-width: 1050px) {
+  .role-dashboard-grid,
+  .engineer-grid,
+  .admin-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .dashboard-lower {
-    grid-template-columns: 1fr;
+  .dashboard-quick-links {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 700px) {
-  .dashboard-page {
+@media (max-width: 650px) {
+  .role-dashboard {
     width: calc(100% - 28px);
 
     padding-top: 35px;
   }
 
-  .dashboard-welcome {
-    flex-direction: column;
-    align-items: flex-start;
+  .role-dashboard-header {
+    padding: 28px 22px;
   }
 
-  .dashboard-user {
-    width: 100%;
-  }
-
-  .dashboard-main-grid {
+  .role-dashboard-grid,
+  .engineer-grid,
+  .admin-grid {
     grid-template-columns: 1fr;
   }
 
-  .workspace-card {
+  .dashboard-quick-links {
+    grid-template-columns: 1fr;
+  }
+
+  .role-card {
     min-height: 210px;
   }
 
-  .quick-actions,
-  .dashboard-info-card {
+  .dashboard-quick-section {
     padding: 22px;
   }
 }

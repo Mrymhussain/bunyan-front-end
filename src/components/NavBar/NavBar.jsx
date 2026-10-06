@@ -54,33 +54,165 @@ const NavBar = () => {
         >
           {user ? (
             <>
-              <Link to="/dashboard" onClick={closeMenu}>
+              <Link
+                to="/dashboard"
+                onClick={closeMenu}
+              >
                 Dashboard
               </Link>
 
-              <Link to="/projects" onClick={closeMenu}>
-                Projects
-              </Link>
+              {user.role === 'client' && (
+                <>
+                  <Link
+                    to="/projects"
+                    onClick={closeMenu}
+                  >
+                    Projects
+                  </Link>
 
-              <Link to="/professionals" onClick={closeMenu}>
-                Professionals
-              </Link>
+                  <Link
+                    to="/professionals"
+                    onClick={closeMenu}
+                  >
+                    Professionals
+                  </Link>
 
-              <Link to="/services" onClick={closeMenu}>
-                Services
-              </Link>
+                  <Link
+                    to="/services"
+                    onClick={closeMenu}
+                  >
+                    Services
+                  </Link>
 
-              <Link to="/materials" onClick={closeMenu}>
-                Materials
-              </Link>
+                  <Link
+                    to="/materials"
+                    onClick={closeMenu}
+                  >
+                    Materials
+                  </Link>
 
-              <Link to="/orders" onClick={closeMenu}>
-                Orders
-              </Link>
+                  <Link
+                    to="/orders"
+                    onClick={closeMenu}
+                  >
+                    Orders
+                  </Link>
 
-              <Link to="/reviews" onClick={closeMenu}>
-                Reviews
-              </Link>
+                  <Link
+                    to="/reviews"
+                    onClick={closeMenu}
+                  >
+                    Reviews
+                  </Link>
+                </>
+              )}
+
+              {user.role === 'engineer' && (
+                <>
+                  <Link
+                    to="/projects"
+                    onClick={closeMenu}
+                  >
+                    Projects
+                  </Link>
+
+                  <Link
+                    to="/consultations"
+                    onClick={closeMenu}
+                  >
+                    Consultations
+                  </Link>
+
+                  <Link
+                    to="/reviews"
+                    onClick={closeMenu}
+                  >
+                    Reviews
+                  </Link>
+                </>
+              )}
+
+              {user.role === 'specialist' && (
+                <>
+                  <Link
+                    to="/service-requests"
+                    onClick={closeMenu}
+                  >
+                    Service Requests
+                  </Link>
+
+                  <Link
+                    to="/reviews"
+                    onClick={closeMenu}
+                  >
+                    Reviews
+                  </Link>
+                </>
+              )}
+
+              {user.role === 'supplier' && (
+                <>
+                  <Link
+                    to="/materials"
+                    onClick={closeMenu}
+                  >
+                    Materials
+                  </Link>
+
+                  <Link
+                    to="/orders"
+                    onClick={closeMenu}
+                  >
+                    Orders
+                  </Link>
+                </>
+              )}
+
+              {user.role === 'admin' && (
+                <>
+                  <Link
+                    to="/projects"
+                    onClick={closeMenu}
+                  >
+                    Projects
+                  </Link>
+
+                  <Link
+                    to="/consultations"
+                    onClick={closeMenu}
+                  >
+                    Consultations
+                  </Link>
+
+                  <Link
+                    to="/service-requests"
+                    onClick={closeMenu}
+                  >
+                    Services
+                  </Link>
+
+                  <Link
+                    to="/materials"
+                    onClick={closeMenu}
+                  >
+                    Materials
+                  </Link>
+
+                  <Link
+                    to="/orders"
+                    onClick={closeMenu}
+                  >
+                    Orders
+                  </Link>
+
+                  <Link
+                    to="/reviews"
+                    onClick={closeMenu}
+                  >
+                    Reviews
+                  </Link>
+                </>
+              )}
 
               <Link
                 to="/profile"
@@ -100,11 +232,17 @@ const NavBar = () => {
             </>
           ) : (
             <>
-              <Link to="/" onClick={closeMenu}>
+              <Link
+                to="/"
+                onClick={closeMenu}
+              >
                 Home
               </Link>
 
-              <Link to="/sign-in" onClick={closeMenu}>
+              <Link
+                to="/sign-in"
+                onClick={closeMenu}
+              >
                 Sign In
               </Link>
 
