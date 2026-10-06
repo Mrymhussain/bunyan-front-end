@@ -1,0 +1,289 @@
+.engineer-profile-page {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 45px 0 80px;
+  }
+  
+  .engineer-profile-back {
+    display: inline-block;
+    margin-bottom: 35px;
+    color: var(--gray);
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .engineer-profile-back:hover {
+    color: var(--burgundy);
+    transform: translateX(-4px);
+  }
+  
+  .engineer-profile-hero {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 38px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .engineer-profile-avatar {
+    width: 78px;
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--burgundy) !important;
+    border: 0 !important;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm) !important;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .engineer-profile-heading {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  .engineer-profile-label {
+    margin: 0 0 7px;
+    color: var(--burgundy);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  
+  .engineer-profile-heading h1 {
+    margin: 0 0 10px;
+    color: var(--charcoal);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    letter-spacing: -0.055em;
+  }
+  
+  .engineer-profile-specialty {
+    display: inline-block;
+    padding: 7px 11px;
+    background: var(--pink-light);
+    border-radius: 999px;
+    color: var(--burgundy);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  
+  .engineer-profile-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+  }
+  
+  .engineer-profile-main {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  .engineer-profile-section {
+    margin: 0 0 18px !important;
+    padding: 30px !important;
+    background: white !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 18px;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .engineer-profile-small-label {
+    margin: 0 0 7px;
+    color: var(--burgundy);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  
+  .engineer-profile-section h2 {
+    margin: 0 0 12px;
+    color: var(--charcoal);
+    font-size: 1.4rem;
+  }
+  
+  .engineer-profile-section > p:last-child {
+    max-width: 600px;
+    margin: 0;
+    color: var(--gray);
+    font-size: 0.84rem;
+    line-height: 1.8;
+  }
+  
+  .engineer-profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  .engineer-info-card {
+    min-height: 110px;
+    margin: 0 !important;
+    padding: 20px !important;
+    background: white !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 14px;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .engineer-info-card span {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--gray);
+    font-size: 0.64rem;
+  }
+  
+  .engineer-info-card strong {
+    color: var(--charcoal);
+    font-size: 0.82rem;
+    word-break: break-word;
+  }
+  
+  .engineer-profile-sidebar {
+    margin: 0;
+  }
+  
+  .engineer-consultation-card {
+    margin: 0 !important;
+    padding: 30px !important;
+    background: var(--burgundy) !important;
+    border: 0 !important;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md) !important;
+    color: white;
+  }
+  
+  .engineer-consultation-label {
+    margin: 0 0 18px;
+    color: var(--pink);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  
+  .engineer-consultation-card h2 {
+    margin: 0 0 12px;
+    color: white;
+    font-size: 1.7rem;
+    line-height: 1.25;
+  }
+  
+  .engineer-consultation-card > p:not(
+    .engineer-consultation-label
+  ) {
+    margin: 0 0 25px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  
+  .engineer-consultation-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: white;
+    border-radius: 10px;
+    color: var(--burgundy);
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+  
+  .engineer-consultation-button:hover {
+    background: var(--pink-light);
+    transform: translateY(-2px);
+  }
+  
+  .engineer-consultation-button span {
+    transition: transform 0.2s ease;
+  }
+  
+  .engineer-consultation-button:hover span {
+    transform: translateX(4px);
+  }
+  
+  .engineer-profile-message,
+  .engineer-profile-loading {
+    margin-top: 60px;
+    padding: 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--gray);
+    text-align: center;
+  }
+  
+  .engineer-profile-hero,
+  .engineer-profile-main,
+  .engineer-profile-sidebar {
+    animation: engineerProfileReveal 0.5s ease both;
+  }
+  
+  .engineer-profile-sidebar {
+    animation-delay: 0.08s;
+  }
+  
+  @keyframes engineerProfileReveal {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .engineer-profile-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .engineer-profile-page {
+      width: calc(100% - 28px);
+      padding-top: 30px;
+    }
+  
+    .engineer-profile-hero {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  
+    .engineer-profile-info-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .engineer-profile-avatar {
+      width: 64px;
+      height: 64px;
+    }
+  }
