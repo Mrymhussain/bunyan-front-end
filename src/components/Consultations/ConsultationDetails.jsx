@@ -10,6 +10,8 @@ import {
   getConsultation,
 } from '../../services/consultationService';
 
+import './ConsultationDetails.css';
+
 const ConsultationDetails = () => {
   const { consultationId } = useParams();
   const navigate = useNavigate();
@@ -47,41 +49,137 @@ const ConsultationDetails = () => {
     }
   };
 
+  const formatDate = (date) => {
+    if (!date) {
+      return 'Not scheduled';
+    }
+
+    return new Date(date).toLocaleString();
+  };
+
   if (message) {
-    return <p>{message}</p>;
+    return (
+      <main className="consultation-details-page">
+        <p className="consultation-details-message">
+          {message}
+        </p>
+      </main>
+    );
   }
 
   if (!consultation) {
-    return <p>Loading consultation...</p>;
+    return (
+      <main className="consultation-details-page">
+        <p className="consultation-details-loading">
+          Loading consultation...
+        </p>
+      </main>
+    );
   }
 
   return (
-    <main>
-      <h1>{consultation.topic}</h1>
-
-      <p>
-        Description: {consultation.description || 'No description'}
-      </p>
-
-      <p>Status: {consultation.status}</p>
-      <p>Meeting Type: {consultation.meeting_type}</p>
-      <p>Scheduled At: {consultation.scheduled_at}</p>
-
-      <Link to={`/consultations/${consultation.id}/edit`}>
-        Edit Consultation
+    <main className="consultation-details-page">
+      <Link
+        to="/consultations"
+        className="consultation-details-back"
+      >
+        ← Back to Consultations
       </Link>
 
-      <br />
+      <section className="consultation-details-header">
+        <div>
+          <p className="consultation-details-label">
+            Engineering Consultation
+          </p>
 
-      <button type="button" onClick={handleDelete}>
-        Delete Consultation
-      </button>
+          <h1>{consultation.topic}</h1>
 
-      <br />
+          <p>
+            View the consultation information,
+            schedule, and current status.
+          </p>
+        </div>
 
-      <Link to="/consultations">
-        Back to Consultations
-      </Link>
+        <span className="consultation-details-status">
+          {consultation.status}
+        </span>
+      </section>
+
+      <section className="consultation-details-layout">
+        <div className="consultation-details-main">
+          <section className="consultation-details-section">
+            <p className="consultation-details-small-label">
+              Consultation Details
+            </p>
+
+            <h2>About this consultation</h2>
+
+            <p className="consultation-details-description">
+              {consultation.description ||
+                'No description provided.'}
+            </p>
+          </section>
+
+          <section className="consultation-details-info-grid">
+            <div className="consultation-info-card">
+              <span>Status</span>
+
+              <strong>
+                {consultation.status}
+              </strong>
+            </div>
+
+            <div className="consultation-info-card">
+              <span>Meeting Type</span>
+
+              <strong>
+                {consultation.meeting_type === 'in_person'
+                  ? 'In Person'
+                  : 'Online'}
+              </strong>
+            </div>
+
+            <div className="consultation-info-card consultation-info-wide">
+              <span>Scheduled At</span>
+
+              <strong>
+                {formatDate(consultation.scheduled_at)}
+              </strong>
+            </div>
+          </section>
+        </div>
+
+        <aside className="consultation-details-sidebar">
+          <section className="consultation-action-card">
+            <p>Manage Consultation</p>
+
+            <h2>
+              Need to make a change?
+            </h2>
+
+            <span>
+              Update the consultation details or remove
+              the request.
+            </span>
+
+            <Link
+              to={`/consultations/${consultation.id}/edit`}
+              className="consultation-edit-button"
+            >
+              Edit Consultation
+              <strong>→</strong>
+            </Link>
+
+            <button
+              type="button"
+              className="consultation-delete-button"
+              onClick={handleDelete}
+            >
+              Delete Consultation
+            </button>
+          </section>
+        </aside>
+      </section>
     </main>
   );
 };

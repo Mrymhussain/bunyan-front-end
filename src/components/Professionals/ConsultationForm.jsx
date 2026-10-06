@@ -1,131 +1,132 @@
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router';
 
-import { createConsultation } from '../../services/consultationService';
+import { UserContext } from '../../contexts/UserContext';
+import { getConsultations } from '../../services/consultationService';
 
-const ConsultationForm = () => {
-  const { engineerId } = useParams();
-  const navigate = useNavigate();
+import './ConsultationForm.css';
 
+const Consultations = () => {
+  const { user } = useContext(UserContext);
+
+  const [consultations, setConsultations] = useState([]);
   const [message, setMessage] = useState('');
 
-  const [formData, setFormData] = useState({
-    topic: '',
-    description: '',
-    date: '',
-    time: '',
-    meeting_type: 'online',
-  });
+  useEffect(() => {
+    const loadConsultations = async () => {
+      try {
+        const data = await getConsultations();
+        setConsultations(data);
+      } catch (err) {
+        setMessage(err.message);
+      }
+    };
 
-  const handleChange = (evt) => {
-    setMessage('');
+    loadConsultations();
+  }, []);
 
-    setFormData({
-      ...formData,
-      [evt.target.name]: evt.target.value,
-    });
-  };
-
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-
-    try {
-      const consultationData = {
-        engineer_id: Number(engineerId),
-        topic: formData.topic,
-        description: formData.description,
-        scheduled_at: `${formData.date}T${formData.time}:00`,
-        meeting_type: formData.meeting_type,
-      };
-
-      await createConsultation(consultationData);
-
-      navigate('/consultations');
-    } catch (err) {
-      setMessage(err.message);
+  const formatDate = (date) => {
+    if (!date) {
+      return 'Not scheduled';
     }
+
+    return new Date(date).toLocaleString();
   };
 
   return (
-    <main>
-      <h1>Request Consultation</h1>
+    <main className="consultations-page">
+      <section className="consultations-header">
+        <p className="consultations-label">
+          BUNYAN Consultations
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>
+          {user?.role === 'engineer'
+            ? 'Consultation Requests'
+            : 'My Consultations'}
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="topic">Topic</label>
-          <input
-            type="text"
-            id="topic"
-            name="topic"
-            value={formData.topic}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <p>
+          {user?.role === 'engineer'
+            ? 'View consultation requests and scheduled meetings with clients.'
+            : 'Track your engineering consultation requests and meeting details.'}
+        </p>
+      </section>
 
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
+      {message && (
+        <p className="consultations-message">
+          {message}
+        </p>
+      )}
 
-        <div>
-          <label htmlFor="date">Preferred Date</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      {consultations.length === 0 ? (
+        <section className="consultations-empty">
+          <div className="consultations-empty-number">
+            01
+          </div>
 
-        <div>
-          <label htmlFor="time">Preferred Time</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <h2>No consultations yet</h2>
 
-        <div>
-          <label htmlFor="meeting_type">Meeting Type</label>
+          <p>
+            {user?.role === 'engineer'
+              ? 'There are no consultation requests available right now.'
+              : 'Browse our professionals and request a consultation with an engineer.'}
+          </p>
 
-          <select
-            id="meeting_type"
-            name="meeting_type"
-            value={formData.meeting_type}
-            onChange={handleChange}
-          >
-            <option value="online">Online</option>
-            <option value="in_person">In Person</option>
-          </select>
-        </div>
+          {user?.role === 'client' && (
+            <Link to="/professionals">
+              Find an Engineer →
+            </Link>
+          )}
+        </section>
+      ) : (
+        <section className="consultations-grid">
+          {consultations.map((consultation, index) => (
+            <article
+              key={consultation.id}
+              className="consultation-card"
+            >
+              <div className="consultation-card-top">
+                <span className="consultation-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
 
-        <button type="submit">
-          Request Consultation
-        </button>
+                <span className="consultation-status">
+                  {consultation.status}
+                </span>
+              </div>
 
-        <button
-          type="button"
-          onClick={() => navigate(`/engineers/${engineerId}`)}
-        >
-          Cancel
-        </button>
-      </form>
+              <div className="consultation-card-content">
+                <p className="consultation-type">
+                  {consultation.meeting_type === 'in_person'
+                    ? 'In Person'
+                    : 'Online'}
+                </p>
+
+                <h2>{consultation.topic}</h2>
+
+                <div className="consultation-date">
+                  <span>Scheduled For</span>
+
+                  <strong>
+                    {formatDate(consultation.scheduled_at)}
+                  </strong>
+                </div>
+              </div>
+
+              <Link
+                to={`/consultations/${consultation.id}`}
+                className="consultation-view-link"
+              >
+                View Consultation
+                <span>→</span>
+              </Link>
+            </article>
+          ))}
+        </section>
+      )}
     </main>
   );
 };
 
-export default ConsultationForm;
+export default Consultations;
