@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router';
 
 import { createReview } from '../../services/reviewService';
 
+import './ReviewForm.css';
+
 const ReviewForm = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -40,55 +42,84 @@ const ReviewForm = () => {
   };
 
   return (
-    <main>
-      <h1>Leave a Review</h1>
+    <main className="review-form-page">
+      <section className="review-form-header">
+        <p className="review-form-label">
+          Share Your Experience
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Leave a Review</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="rating">
-            Rating
-          </label>
+        <p>
+          Share your feedback about your experience
+          with this BUNYAN professional.
+        </p>
+      </section>
 
-          <select
-            id="rating"
-            name="rating"
-            value={formData.rating}
-            onChange={handleChange}
-          >
-            <option value="5">5 - Excellent</option>
-            <option value="4">4 - Very Good</option>
-            <option value="3">3 - Good</option>
-            <option value="2">2 - Fair</option>
-            <option value="1">1 - Poor</option>
-          </select>
-        </div>
+      <section className="review-form-card">
+        {message && (
+          <p className="review-form-message">
+            {message}
+          </p>
+        )}
 
-        <div>
-          <label htmlFor="comment">
-            Comment
-          </label>
-
-          <textarea
-            id="comment"
-            name="comment"
-            value={formData.comment}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="submit">
-          Submit Review
-        </button>
-
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
+        <form
+          className="review-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="review-form-field">
+            <label htmlFor="rating">
+              Rating
+            </label>
+
+            <select
+              id="rating"
+              name="rating"
+              value={formData.rating}
+              onChange={handleChange}
+            >
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Very Good</option>
+              <option value="3">3 - Good</option>
+              <option value="2">2 - Fair</option>
+              <option value="1">1 - Poor</option>
+            </select>
+          </div>
+
+          <div className="review-form-field">
+            <label htmlFor="comment">
+              Comment
+            </label>
+
+            <textarea
+              id="comment"
+              name="comment"
+              value={formData.comment}
+              onChange={handleChange}
+              placeholder="Tell us about your experience..."
+              rows="6"
+            />
+          </div>
+
+          <div className="review-form-actions">
+            <button
+              type="submit"
+              className="review-form-submit"
+            >
+              Submit Review
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="review-form-cancel"
+              onClick={() => navigate(-1)}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };
