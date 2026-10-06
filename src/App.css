@@ -1,3 +1,271 @@
 #root {
-    min-height: 100vh;
+  min-height: 100vh;
+}
+
+main {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 48px 0 70px;
+}
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  color: var(--charcoal);
+}
+
+h1 {
+  margin-bottom: 12px;
+
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  margin-bottom: 10px;
+
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.05rem;
+}
+
+p {
+  color: var(--gray);
+
+  line-height: 1.7;
+}
+
+/* LINKS */
+
+main a {
+  font-weight: 600;
+}
+
+/* BUTTONS */
+
+button {
+  border: none;
+  border-radius: var(--radius-sm);
+
+  padding: 12px 20px;
+
+  background: var(--burgundy);
+  color: var(--white);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+button:hover {
+  background: var(--burgundy-dark);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 16px rgba(121, 45, 57, 0.18);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+/* FORMS */
+
+form {
+  width: min(620px, 100%);
+
+  padding: 32px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+}
+
+form > div {
+  margin-bottom: 22px;
+}
+
+label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--charcoal);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  background: #fffefe;
+  color: var(--charcoal);
+
+  font-size: 0.95rem;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa1a4;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--burgundy);
+
+  box-shadow:
+    0 0 0 3px rgba(121, 45, 57, 0.1);
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* CARDS */
+
+section {
+  margin-top: 30px;
+}
+
+main > div > div,
+section > div > div {
+  margin-bottom: 16px;
+  padding: 22px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+main > div > div:hover,
+section > div > div:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--pink);
+
+  box-shadow: var(--shadow-md);
+}
+
+/* CARD ACCENTS */
+
+main > div > div h2,
+section > div > div h2 {
+  color: var(--burgundy);
+}
+
+main > div > div p,
+section > div > div p {
+  margin: 6px 0;
+}
+
+/* SOFT SECTION BACKGROUND */
+
+.soft-section {
+  padding: 30px;
+
+  background: var(--pink-light);
+
+  border-radius: var(--radius-lg);
+}
+
+/* STATUS BADGE */
+
+.badge {
+  display: inline-block;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  background: var(--pink-light);
+  color: var(--burgundy);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* SECONDARY BUTTON */
+
+.secondary-button {
+  background: var(--pink-light);
+  color: var(--burgundy);
+}
+
+.secondary-button:hover {
+  background: var(--blush);
+  color: var(--burgundy-dark);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  main {
+    width: calc(100% - 28px);
+
+    padding-top: 32px;
+    padding-bottom: 50px;
   }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  form {
+    padding: 22px;
+  }
+
+  button {
+    width: 100%;
+
+    margin-top: 10px;
+  }
+
+  button + button {
+    margin-left: 0;
+  }
+}
