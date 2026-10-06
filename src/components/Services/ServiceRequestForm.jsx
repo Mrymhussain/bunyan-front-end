@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router';
 import { getServiceCategories } from '../../services/serviceService';
 import { createServiceRequest } from '../../services/serviceRequestService';
 
+import './ServiceRequestForm.css';
+
 const ServiceRequestForm = () => {
   const { specialistId } = useParams();
   const navigate = useNavigate();
@@ -61,94 +63,128 @@ const ServiceRequestForm = () => {
   };
 
   return (
-    <main>
-      <h1>Request Service</h1>
+    <main className="service-request-form-page">
+      <section className="service-request-form-header">
+        <p className="service-request-form-label">
+          Property Service
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Request a Service</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="service_category_id">
-            Service Category
-          </label>
+        <p>
+          Tell the specialist what you need, where the job
+          is located, and your preferred date.
+        </p>
+      </section>
 
-          <select
-            id="service_category_id"
-            name="service_category_id"
-            value={formData.service_category_id}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select a service</option>
+      <section className="service-request-form-card">
+        {message && (
+          <p className="service-request-form-message">
+            {message}
+          </p>
+        )}
 
-            {categories.map((category) => (
-              <option
-                key={category.id}
-                value={category.id}
-              >
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="description">
-            Description
-          </label>
-
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="location">
-            Location
-          </label>
-
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="preferred_date">
-            Preferred Date
-          </label>
-
-          <input
-            type="datetime-local"
-            id="preferred_date"
-            name="preferred_date"
-            value={formData.preferred_date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit">
-          Submit Request
-        </button>
-
-        <button
-          type="button"
-          onClick={() =>
-            navigate(`/specialists/${specialistId}`)
-          }
+        <form
+          className="service-request-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="service-request-form-field">
+            <label htmlFor="service_category_id">
+              Service Category
+            </label>
+
+            <select
+              id="service_category_id"
+              name="service_category_id"
+              value={formData.service_category_id}
+              onChange={handleChange}
+              required
+            >
+              <option value="">
+                Select a service
+              </option>
+
+              {categories.map((category) => (
+                <option
+                  key={category.id}
+                  value={category.id}
+                >
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="service-request-form-field">
+            <label htmlFor="description">
+              Job Description
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Describe the work you need..."
+              rows="5"
+              required
+            />
+          </div>
+
+          <div className="service-request-form-row">
+            <div className="service-request-form-field">
+              <label htmlFor="location">
+                Location
+              </label>
+
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="Example: Manama"
+                required
+              />
+            </div>
+
+            <div className="service-request-form-field">
+              <label htmlFor="preferred_date">
+                Preferred Date
+              </label>
+
+              <input
+                type="datetime-local"
+                id="preferred_date"
+                name="preferred_date"
+                value={formData.preferred_date}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="service-request-form-actions">
+            <button
+              type="submit"
+              className="service-request-form-submit"
+            >
+              Submit Request
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="service-request-form-cancel"
+              onClick={() =>
+                navigate(`/specialists/${specialistId}`)
+              }
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };
