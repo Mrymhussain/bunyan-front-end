@@ -6,6 +6,8 @@ import {
   getReviews,
 } from '../../services/reviewService';
 
+import './Reviews.css';
+
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [message, setMessage] = useState('');
@@ -41,40 +43,96 @@ const Reviews = () => {
   };
 
   return (
-    <main>
-      <h1>My Reviews</h1>
+    <main className="reviews-page">
+      <section className="reviews-header">
+        <p className="reviews-label">
+          BUNYAN Community
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>My Reviews</h1>
+
+        <p>
+          View and manage the feedback you have shared
+          with professionals on BUNYAN.
+        </p>
+      </section>
+
+      {message && (
+        <p className="reviews-message">
+          {message}
+        </p>
+      )}
 
       {reviews.length === 0 ? (
-        <p>No reviews yet.</p>
+        <section className="reviews-empty">
+          <div className="reviews-empty-number">
+            01
+          </div>
+
+          <h2>No reviews yet</h2>
+
+          <p>
+            Reviews you create will appear here.
+          </p>
+        </section>
       ) : (
-        <div>
-          {reviews.map((review) => (
-            <div key={review.id}>
-              <h2>Rating: {review.rating}/5</h2>
+        <section className="reviews-grid">
+          {reviews.map((review, index) => (
+            <article
+              key={review.id}
+              className="review-card"
+            >
+              <div className="review-card-top">
+                <span className="review-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
 
-              <p>{review.comment || 'No comment'}</p>
+                <span className="review-rating">
+                  {review.rating}/5
+                </span>
+              </div>
 
-              <p>
-                Reviewed User ID: {review.reviewed_user_id}
-              </p>
+              <div className="review-card-content">
+                <p className="review-card-label">
+                  Your Feedback
+                </p>
 
-              <Link to={`/reviews/${review.id}/edit`}>
-                Edit Review
-              </Link>
+                <h2>
+                  {'★'.repeat(review.rating)}
+                  {'☆'.repeat(5 - review.rating)}
+                </h2>
 
-              <br />
+                <p className="review-comment">
+                  {review.comment || 'No comment provided.'}
+                </p>
 
-              <button
-                type="button"
-                onClick={() => handleDelete(review.id)}
-              >
-                Delete Review
-              </button>
-            </div>
+                <div className="review-user">
+                  <span>Reviewed User</span>
+                  <strong>
+                    User #{review.reviewed_user_id}
+                  </strong>
+                </div>
+              </div>
+
+              <div className="review-card-actions">
+                <Link
+                  to={`/reviews/${review.id}/edit`}
+                  className="review-edit-link"
+                >
+                  Edit Review
+                </Link>
+
+                <button
+                  type="button"
+                  className="review-delete-button"
+                  onClick={() => handleDelete(review.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </article>
           ))}
-        </div>
+        </section>
       )}
     </main>
   );
