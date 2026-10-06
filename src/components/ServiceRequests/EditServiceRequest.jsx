@@ -6,6 +6,8 @@ import {
   updateServiceRequest,
 } from '../../services/serviceRequestService';
 
+import '../Services/ServiceRequestForm.css';
+
 const EditServiceRequest = () => {
   const { requestId } = useParams();
   const navigate = useNavigate();
@@ -73,69 +75,101 @@ const EditServiceRequest = () => {
   };
 
   return (
-    <main>
-      <h1>Edit Service Request</h1>
+    <main className="service-request-form-page">
+      <section className="service-request-form-header">
+        <p className="service-request-form-label">
+          Manage Service
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Edit Service Request</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="description">
-            Description
-          </label>
+        <p>
+          Update the job details, location,
+          or preferred date.
+        </p>
+      </section>
 
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <section className="service-request-form-card">
+        {message && (
+          <p className="service-request-form-message">
+            {message}
+          </p>
+        )}
 
-        <div>
-          <label htmlFor="location">
-            Location
-          </label>
-
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="preferred_date">
-            Preferred Date
-          </label>
-
-          <input
-            type="datetime-local"
-            id="preferred_date"
-            name="preferred_date"
-            value={formData.preferred_date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit">
-          Save Changes
-        </button>
-
-        <button
-          type="button"
-          onClick={() =>
-            navigate(`/service-requests/${requestId}`)
-          }
+        <form
+          className="service-request-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="service-request-form-field">
+            <label htmlFor="description">
+              Job Description
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Describe the work you need..."
+              rows="5"
+              required
+            />
+          </div>
+
+          <div className="service-request-form-row">
+            <div className="service-request-form-field">
+              <label htmlFor="location">
+                Location
+              </label>
+
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="Service location"
+                required
+              />
+            </div>
+
+            <div className="service-request-form-field">
+              <label htmlFor="preferred_date">
+                Preferred Date
+              </label>
+
+              <input
+                type="datetime-local"
+                id="preferred_date"
+                name="preferred_date"
+                value={formData.preferred_date}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="service-request-form-actions">
+            <button
+              type="submit"
+              className="service-request-form-submit"
+            >
+              Save Changes
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="service-request-form-cancel"
+              onClick={() =>
+                navigate(`/service-requests/${requestId}`)
+              }
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };
