@@ -6,6 +6,8 @@ import {
   updateMaterial,
 } from '../../services/materialService';
 
+import './MaterialForm.css';
+
 const EditMaterial = () => {
   const { materialId } = useParams();
   const navigate = useNavigate();
@@ -66,82 +68,132 @@ const EditMaterial = () => {
   };
 
   return (
-    <main>
-      <h1>Edit Material</h1>
+    <main className="material-form-page">
+      <section className="material-form-header">
+        <p className="material-form-label">
+          Supplier Workspace
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Edit Material</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Material Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <p>
+          Update the material details, price, or available stock.
+        </p>
+      </section>
 
-        <div>
-          <label htmlFor="category">Category</label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <section className="material-form-card">
+        {message && (
+          <p className="material-form-message">
+            {message}
+          </p>
+        )}
 
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="price">Price</label>
-          <input
-            type="number"
-            step="0.01"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="stock_quantity">Stock Quantity</label>
-          <input
-            type="number"
-            id="stock_quantity"
-            name="stock_quantity"
-            value={formData.stock_quantity}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit">
-          Save Changes
-        </button>
-
-        <button
-          type="button"
-          onClick={() => navigate(`/materials/${materialId}`)}
+        <form
+          className="material-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="material-form-row">
+            <div className="material-form-field">
+              <label htmlFor="name">
+                Material Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="material-form-field">
+              <label htmlFor="category">
+                Category
+              </label>
+
+              <input
+                type="text"
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="material-form-field">
+            <label htmlFor="description">
+              Description
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="5"
+            />
+          </div>
+
+          <div className="material-form-row">
+            <div className="material-form-field">
+              <label htmlFor="price">
+                Price (BHD)
+              </label>
+
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="material-form-field">
+              <label htmlFor="stock_quantity">
+                Stock Quantity
+              </label>
+
+              <input
+                type="number"
+                min="0"
+                id="stock_quantity"
+                name="stock_quantity"
+                value={formData.stock_quantity}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="material-form-actions">
+            <button
+              type="submit"
+              className="material-form-submit"
+            >
+              Save Changes
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="material-form-cancel"
+              onClick={() =>
+                navigate(`/materials/${materialId}`)
+              }
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };

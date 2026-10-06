@@ -12,6 +12,8 @@ import {
   getOrderItems,
 } from '../../services/orderService';
 
+import './OrderDetails.css';
+
 const OrderDetails = () => {
   const { orderId } = useParams();
   const navigate = useNavigate();
@@ -71,58 +73,163 @@ const OrderDetails = () => {
   };
 
   if (message && !order) {
-    return <p>{message}</p>;
+    return (
+      <main className="order-details-page">
+        <p className="order-details-message">
+          {message}
+        </p>
+      </main>
+    );
   }
 
   if (!order) {
-    return <p>Loading order...</p>;
+    return (
+      <main className="order-details-page">
+        <p className="order-details-loading">
+          Loading order...
+        </p>
+      </main>
+    );
   }
 
   return (
-    <main>
-      <h1>Order #{order.id}</h1>
-
-      <p>Status: {order.status}</p>
-      <p>Total: {order.total_price} BHD</p>
-
-      {message && <p>{message}</p>}
-
-      <section>
-        <h2>Order Items</h2>
-
-        {items.length === 0 ? (
-          <p>No items in this order.</p>
-        ) : (
-          <div>
-            {items.map((item) => (
-              <div key={item.id}>
-                <p>Material ID: {item.material_id}</p>
-                <p>Quantity: {item.quantity}</p>
-
-                <button
-                  type="button"
-                  onClick={() => handleDeleteItem(item.id)}
-                >
-                  Remove Item
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <button
-        type="button"
-        onClick={handleDeleteOrder}
+    <main className="order-details-page">
+      <Link
+        to="/orders"
+        className="order-details-back"
       >
-        Delete Order
-      </button>
-
-      <br />
-
-      <Link to="/orders">
-        Back to Orders
+        ← Back to Orders
       </Link>
+
+      <section className="order-details-layout">
+        <div className="order-details-main">
+          <section className="order-details-heading">
+            <div className="order-details-heading-top">
+              <div>
+                <p className="order-details-label">
+                  BUNYAN Marketplace
+                </p>
+
+                <h1>Order #{order.id}</h1>
+              </div>
+
+              <span className="order-details-status">
+                {order.status}
+              </span>
+            </div>
+
+            <p>
+              View the materials included in this order
+              and manage the order details.
+            </p>
+          </section>
+
+          {message && (
+            <p className="order-details-message">
+              {message}
+            </p>
+          )}
+
+          <section className="order-items-section">
+            <div className="order-items-header">
+              <div>
+                <p>Order Contents</p>
+                <h2>Order Items</h2>
+              </div>
+
+              <span>
+                {items.length} {items.length === 1 ? 'item' : 'items'}
+              </span>
+            </div>
+
+            {items.length === 0 ? (
+              <div className="order-items-empty">
+                <p>No items in this order.</p>
+              </div>
+            ) : (
+              <div className="order-items-list">
+                {items.map((item, index) => (
+                  <article
+                    key={item.id}
+                    className="order-item-card"
+                  >
+                    <div className="order-item-number">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+
+                    <div className="order-item-details">
+                      <span>Material</span>
+                      <strong>
+                        Material #{item.material_id}
+                      </strong>
+                    </div>
+
+                    <div className="order-item-details">
+                      <span>Quantity</span>
+                      <strong>{item.quantity}</strong>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="order-item-remove"
+                      onClick={() =>
+                        handleDeleteItem(item.id)
+                      }
+                    >
+                      Remove
+                    </button>
+                  </article>
+                ))}
+              </div>
+            )}
+          </section>
+        </div>
+
+        <aside className="order-details-sidebar">
+          <div className="order-summary-card">
+            <p className="order-summary-label">
+              Order Summary
+            </p>
+
+            <div>
+              <span>Order Number</span>
+              <strong>#{order.id}</strong>
+            </div>
+
+            <div>
+              <span>Status</span>
+              <strong>{order.status}</strong>
+            </div>
+
+            <div>
+              <span>Total</span>
+              <strong>{order.total_price} BHD</strong>
+            </div>
+
+            <div>
+              <span>Items</span>
+              <strong>{items.length}</strong>
+            </div>
+          </div>
+
+          <div className="order-details-actions">
+            <Link
+              to={`/orders/${order.id}/edit`}
+              className="order-edit-button"
+            >
+              Edit Order
+            </Link>
+
+            <button
+              type="button"
+              className="order-delete-button"
+              onClick={handleDeleteOrder}
+            >
+              Delete Order
+            </button>
+          </div>
+        </aside>
+      </section>
     </main>
   );
 };
