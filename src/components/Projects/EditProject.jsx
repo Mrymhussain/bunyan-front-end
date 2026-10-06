@@ -6,6 +6,8 @@ import {
   updateProject,
 } from '../../services/projectService';
 
+import './ProjectForm.css';
+
 const EditProject = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
@@ -69,104 +71,188 @@ const EditProject = () => {
   };
 
   return (
-    <main>
-      <h1>Edit Project</h1>
+    <main className="project-form-page">
+      <section className="project-form-header">
+        <p className="project-form-label">
+          Project Management
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>Edit Project</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Project Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <p>
+          Update the project information, status,
+          and current progress.
+        </p>
+      </section>
 
-        <div>
-          <label htmlFor="project_type">Project Type</label>
-          <input
-            type="text"
-            id="project_type"
-            name="project_type"
-            value={formData.project_type}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <section className="project-form-card">
+        {message && (
+          <p className="project-form-message">
+            {message}
+          </p>
+        )}
 
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="location">Location</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="budget_range">Budget Range</label>
-          <input
-            type="text"
-            id="budget_range"
-            name="budget_range"
-            value={formData.budget_range}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="status">Status</label>
-          <input
-            type="text"
-            id="status"
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="progress">Progress</label>
-          <input
-            type="number"
-            id="progress"
-            name="progress"
-            min="0"
-            max="100"
-            value={formData.progress}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="submit">
-          Save Changes
-        </button>
-
-        <button
-          type="button"
-          onClick={() => navigate(`/projects/${projectId}`)}
+        <form
+          className="project-form"
+          onSubmit={handleSubmit}
         >
-          Cancel
-        </button>
-      </form>
+          <div className="project-form-field">
+            <label htmlFor="title">
+              Project Title
+            </label>
+
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Project title"
+              required
+            />
+          </div>
+
+          <div className="project-form-row">
+            <div className="project-form-field">
+              <label htmlFor="project_type">
+                Project Type
+              </label>
+
+              <input
+                type="text"
+                id="project_type"
+                name="project_type"
+                value={formData.project_type}
+                onChange={handleChange}
+                placeholder="Project type"
+                required
+              />
+            </div>
+
+            <div className="project-form-field">
+              <label htmlFor="location">
+                Location
+              </label>
+
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="Project location"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="project-form-field">
+            <label htmlFor="description">
+              Description
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Project description"
+              rows="5"
+            />
+          </div>
+
+          <div className="project-form-field">
+            <label htmlFor="budget_range">
+              Budget Range
+            </label>
+
+            <input
+              type="text"
+              id="budget_range"
+              name="budget_range"
+              value={formData.budget_range}
+              onChange={handleChange}
+              placeholder="Example: BHD 20,000 - 30,000"
+            />
+          </div>
+
+          <div className="project-form-row">
+            <div className="project-form-field">
+              <label htmlFor="status">
+                Status
+              </label>
+
+              <input
+                type="text"
+                id="status"
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                placeholder="Project status"
+              />
+            </div>
+
+            <div className="project-form-field">
+              <label htmlFor="progress">
+                Progress
+              </label>
+
+              <div className="edit-progress-input">
+                <input
+                  type="number"
+                  id="progress"
+                  name="progress"
+                  min="0"
+                  max="100"
+                  value={formData.progress}
+                  onChange={handleChange}
+                />
+
+                <span>%</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="edit-project-progress">
+            <div className="edit-project-progress-heading">
+              <span>Current Progress</span>
+
+              <strong>
+                {formData.progress || 0}%
+              </strong>
+            </div>
+
+            <div className="edit-project-progress-track">
+              <div
+                className="edit-project-progress-fill"
+                style={{
+                  width: `${formData.progress || 0}%`,
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="project-form-actions">
+            <button
+              type="submit"
+              className="project-form-submit"
+            >
+              Save Changes
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
+              className="project-form-cancel"
+              onClick={() =>
+                navigate(`/projects/${projectId}`)
+              }
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
   );
 };
