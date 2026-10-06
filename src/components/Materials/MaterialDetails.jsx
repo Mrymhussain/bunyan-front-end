@@ -17,6 +17,8 @@ import {
   createOrder,
 } from '../../services/orderService';
 
+import './MaterialDetails.css';
+
 const MaterialDetails = () => {
   const { materialId } = useParams();
   const navigate = useNavigate();
@@ -77,74 +79,156 @@ const MaterialDetails = () => {
   };
 
   if (message && !material) {
-    return <p>{message}</p>;
+    return (
+      <main className="material-details-page">
+        <p className="material-details-message">
+          {message}
+        </p>
+      </main>
+    );
   }
 
   if (!material) {
-    return <p>Loading material...</p>;
+    return (
+      <main className="material-details-page">
+        <p className="material-details-loading">
+          Loading material...
+        </p>
+      </main>
+    );
   }
 
   return (
-    <main>
-      <h1>{material.name}</h1>
-
-      <p>Category: {material.category}</p>
-
-      <p>
-        Description: {material.description || 'No description'}
-      </p>
-
-      <p>Price: {material.price} BHD</p>
-      <p>Stock: {material.stock_quantity}</p>
-
-      {message && <p>{message}</p>}
-
-      {user?.role === 'client' && (
-        <div>
-          <label htmlFor="quantity">
-            Quantity
-          </label>
-
-          <input
-            type="number"
-            id="quantity"
-            min="1"
-            max={material.stock_quantity}
-            value={quantity}
-            onChange={(evt) => setQuantity(evt.target.value)}
-          />
-
-          <button
-            type="button"
-            onClick={handleOrder}
-          >
-            Place Order
-          </button>
-        </div>
-      )}
-
-      {user?.role === 'supplier' && (
-        <>
-          <Link to={`/materials/${material.id}/edit`}>
-            Edit Material
-          </Link>
-
-          <br />
-
-          <button
-            type="button"
-            onClick={handleDelete}
-          >
-            Delete Material
-          </button>
-
-          <br />
-        </>
-      )}
-
-      <Link to="/materials">
-        Back to Materials
+    <main className="material-details-page">
+      <Link
+        to="/materials"
+        className="material-details-back"
+      >
+        ← Back to Materials
       </Link>
+
+      <section className="material-details-layout">
+        <div className="material-details-main">
+          <div className="material-details-heading">
+            <p className="material-details-label">
+              {material.category}
+            </p>
+
+            <h1>{material.name}</h1>
+
+            <p>
+              {material.description || 'No description available.'}
+            </p>
+          </div>
+
+          <div className="material-details-info">
+            <div className="material-details-info-card">
+              <span>Price</span>
+
+              <strong>
+                {material.price} BHD
+              </strong>
+            </div>
+
+            <div className="material-details-info-card">
+              <span>Available Stock</span>
+
+              <strong>
+                {material.stock_quantity}
+              </strong>
+            </div>
+          </div>
+
+          {message && (
+            <p className="material-details-message">
+              {message}
+            </p>
+          )}
+
+          {user?.role === 'client' && (
+            <section className="material-order-card">
+              <p className="material-order-label">
+                Order Material
+              </p>
+
+              <h2>Select Quantity</h2>
+
+              <p>
+                Choose how many units you would like
+                to order from this supplier.
+              </p>
+
+              <div className="material-order-controls">
+                <div className="material-quantity-field">
+                  <label htmlFor="quantity">
+                    Quantity
+                  </label>
+
+                  <input
+                    type="number"
+                    id="quantity"
+                    min="1"
+                    max={material.stock_quantity}
+                    value={quantity}
+                    onChange={(evt) =>
+                      setQuantity(evt.target.value)
+                    }
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  className="material-order-button"
+                  onClick={handleOrder}
+                >
+                  Place Order
+                  <span>→</span>
+                </button>
+              </div>
+            </section>
+          )}
+        </div>
+
+        <aside className="material-details-sidebar">
+          <div className="material-details-summary">
+            <p>Material #{material.id}</p>
+
+            <div>
+              <span>Category</span>
+              <strong>{material.category}</strong>
+            </div>
+
+            <div>
+              <span>Price</span>
+              <strong>{material.price} BHD</strong>
+            </div>
+
+            <div>
+              <span>Stock</span>
+              <strong>{material.stock_quantity}</strong>
+            </div>
+          </div>
+
+          {user?.role === 'supplier' && (
+            <div className="material-details-actions">
+              <Link
+                to={`/materials/${material.id}/edit`}
+                className="material-edit-button"
+              >
+                Edit Material
+              </Link>
+
+              <button
+                type="button"
+                className="material-delete-button"
+                onClick={handleDelete}
+              >
+                Delete Material
+              </button>
+            </div>
+          )}
+        </aside>
+      </section>
     </main>
   );
 };
