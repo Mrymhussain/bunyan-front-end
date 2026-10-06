@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 
 import { getConsultations } from '../../services/consultationService';
 
+import './Consultations.css';
+
 const Consultations = () => {
   const [consultations, setConsultations] = useState([]);
   const [message, setMessage] = useState('');
@@ -21,29 +23,95 @@ const Consultations = () => {
   }, []);
 
   return (
-    <main>
-      <h1>My Consultations</h1>
+    <main className="consultations-page">
+      <section className="consultations-header">
+        <p className="consultations-label">
+          BUNYAN Consultations
+        </p>
 
-      {message && <p>{message}</p>}
+        <h1>My Consultations</h1>
+
+        <p>
+          View your consultation requests, meeting details,
+          and current status.
+        </p>
+      </section>
+
+      {message && (
+        <p className="consultations-message">
+          {message}
+        </p>
+      )}
 
       {consultations.length === 0 ? (
-        <p>No consultations yet.</p>
+        <section className="consultations-empty">
+          <div className="consultations-empty-number">
+            01
+          </div>
+
+          <h2>No consultations yet</h2>
+
+          <p>
+            Your engineering consultation requests will appear here.
+          </p>
+
+          <Link to="/professionals">
+            Browse Professionals →
+          </Link>
+        </section>
       ) : (
-        <div>
-          {consultations.map((consultation) => (
-            <div key={consultation.id}>
-              <h2>{consultation.topic}</h2>
+        <section className="consultations-grid">
+          {consultations.map((consultation, index) => (
+            <article
+              key={consultation.id}
+              className="consultation-card"
+            >
+              <div className="consultation-card-top">
+                <span className="consultation-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
 
-              <p>Status: {consultation.status}</p>
-              <p>Meeting Type: {consultation.meeting_type}</p>
-              <p>Date: {consultation.scheduled_at}</p>
+                <span className="consultation-status">
+                  {consultation.status}
+                </span>
+              </div>
 
-              <Link to={`/consultations/${consultation.id}`}>
+              <div className="consultation-card-content">
+                <p className="consultation-card-label">
+                  Engineering Consultation
+                </p>
+
+                <h2>
+                  {consultation.topic}
+                </h2>
+
+                <div className="consultation-info">
+                  <div>
+                    <span>Meeting Type</span>
+                    <strong>
+                      {consultation.meeting_type}
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>Date</span>
+                    <strong>
+                      {consultation.scheduled_at || 'Not scheduled'}
+                    </strong>
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                to={`/consultations/${consultation.id}`}
+                className="consultation-view-link"
+              >
                 View Consultation
+                <span>→</span>
               </Link>
-            </div>
+            </article>
           ))}
-        </div>
+        </section>
       )}
     </main>
   );
