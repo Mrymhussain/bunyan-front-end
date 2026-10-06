@@ -1,0 +1,406 @@
+.project-details-page {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 45px 0 80px;
+  }
+  
+  
+  .project-details-back {
+    display: inline-block;
+  
+    margin-bottom: 35px;
+  
+    color: var(--gray);
+  
+    font-size: 0.75rem;
+    font-weight: 600;
+  
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .project-details-back:hover {
+    color: var(--burgundy);
+  
+    transform: translateX(-4px);
+  }
+    
+  .project-details-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  
+    gap: 30px;
+  
+    margin-bottom: 38px;
+    padding-bottom: 28px;
+  
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .project-details-label {
+    margin: 0 0 8px;
+  
+    color: var(--burgundy);
+  
+    font-size: 0.68rem;
+    font-weight: 700;
+  
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  
+  .project-details-header h1 {
+    margin: 0 0 8px;
+  
+    color: var(--charcoal);
+  
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  
+    letter-spacing: -0.055em;
+  }
+  
+  .project-details-location {
+    margin: 0;
+  
+    color: var(--gray);
+  
+    font-size: 0.86rem;
+  }
+  
+  .project-details-status {
+    flex-shrink: 0;
+  
+    padding: 8px 13px;
+  
+    background: var(--pink-light);
+  
+    border-radius: 999px;
+  
+    color: var(--burgundy);
+  
+    font-size: 0.7rem;
+    font-weight: 700;
+  
+    text-transform: capitalize;
+  }
+  
+  
+  .project-details-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+  
+    gap: 25px;
+  }
+  
+  
+  .project-details-main {
+    margin: 0 !important;
+    padding: 0 !important;
+  
+    background: transparent !important;
+  
+    border: 0 !important;
+  
+    box-shadow: none !important;
+  }
+  
+  .project-details-section {
+    margin: 0 0 20px !important;
+    padding: 30px !important;
+  
+    background: white !important;
+  
+    border: 1px solid var(--border) !important;
+    border-radius: 18px;
+  
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .project-details-small-label {
+    margin: 0 0 7px;
+  
+    color: var(--burgundy);
+  
+    font-size: 0.65rem;
+    font-weight: 700;
+  
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  
+  .project-details-section h2 {
+    margin: 0 0 14px;
+  
+    color: var(--charcoal);
+  
+    font-size: 1.4rem;
+  }
+  
+  .project-details-description {
+    margin: 0;
+  
+    color: var(--gray);
+  
+    font-size: 0.86rem;
+    line-height: 1.8;
+  }
+  
+  .project-details-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  
+    gap: 12px;
+  
+    margin: 0 !important;
+    padding: 0 !important;
+  
+    background: transparent !important;
+  
+    border: 0 !important;
+  
+    box-shadow: none !important;
+  }
+  
+  .project-info-box {
+    min-height: 110px;
+  
+    margin: 0 !important;
+    padding: 20px !important;
+  
+    background: white !important;
+  
+    border: 1px solid var(--border) !important;
+    border-radius: 14px;
+  
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .project-info-box span {
+    display: block;
+  
+    margin-bottom: 9px;
+  
+    color: var(--gray);
+  
+    font-size: 0.65rem;
+  }
+  
+  .project-info-box strong {
+    color: var(--charcoal);
+  
+    font-size: 0.85rem;
+  }
+  
+
+  .project-details-sidebar {
+    margin: 0;
+  }
+  
+  .project-progress-card {
+    margin: 0 0 14px !important;
+    padding: 28px !important;
+  
+    background: var(--burgundy) !important;
+  
+    border: 0 !important;
+    border-radius: 18px;
+  
+    box-shadow: var(--shadow-md) !important;
+  
+    color: white;
+  }
+  
+  .project-progress-card > p {
+    margin: 0 0 20px;
+  
+    color: var(--pink);
+  
+    font-size: 0.68rem;
+    font-weight: 700;
+  
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  
+  .project-progress-value {
+    margin: 0 0 22px !important;
+    padding: 0 !important;
+  
+    background: transparent !important;
+  
+    border: 0 !important;
+  
+    box-shadow: none !important;
+  
+    color: white;
+  
+    font-size: 3.3rem;
+    font-weight: 700;
+  
+    letter-spacing: -0.06em;
+  }
+  
+  .project-progress-value span {
+    font-size: 1.2rem;
+  }
+  
+  .project-details-progress-track {
+    width: 100%;
+    height: 6px;
+  
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+  
+    background: rgba(255, 255, 255, 0.2) !important;
+  
+    border: 0 !important;
+    border-radius: 999px;
+  
+    box-shadow: none !important;
+  
+    overflow: hidden;
+  }
+  
+  .project-details-progress-fill {
+    height: 100%;
+  
+    margin: 0 !important;
+    padding: 0 !important;
+  
+    background: var(--pink) !important;
+  
+    border: 0 !important;
+    border-radius: 999px;
+  
+    box-shadow: none !important;
+  }
+  
+  .project-progress-text {
+    color: rgba(255, 255, 255, 0.65);
+  
+    font-size: 0.65rem;
+  }
+  
+  
+  .project-details-edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    padding: 16px 18px;
+  
+    background: white;
+  
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  
+    color: var(--burgundy);
+  
+    font-size: 0.78rem;
+    font-weight: 700;
+  
+    box-shadow: var(--shadow-sm);
+  
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .project-details-edit:hover {
+    transform: translateY(-2px);
+  
+    border-color: var(--pink);
+  }
+  
+  .project-details-edit span {
+    transition: transform 0.2s ease;
+  }
+  
+  .project-details-edit:hover span {
+    transform: translateX(4px);
+  }
+  
+  
+  .project-details-message,
+  .project-details-loading {
+    margin-top: 60px;
+    padding: 20px;
+  
+    background: white;
+  
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  
+    color: var(--gray);
+  
+    text-align: center;
+  }
+  
+
+  
+  .project-details-header,
+  .project-details-main,
+  .project-details-sidebar {
+    animation: projectDetailsReveal 0.5s ease both;
+  }
+  
+  .project-details-sidebar {
+    animation-delay: 0.08s;
+  }
+  
+  @keyframes projectDetailsReveal {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
+  @media (max-width: 800px) {
+    .project-details-layout {
+      grid-template-columns: 1fr;
+    }
+  
+    .project-details-sidebar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+  
+      gap: 12px;
+    }
+  
+    .project-progress-card {
+      margin: 0 !important;
+    }
+  
+    .project-details-edit {
+      align-self: stretch;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .project-details-page {
+      width: calc(100% - 28px);
+  
+      padding-top: 30px;
+    }
+  
+    .project-details-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  
+    .project-details-info-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .project-details-sidebar {
+      grid-template-columns: 1fr;
+    }
+  }
