@@ -1,26 +1,38 @@
-import { useEffect, useState } from 'react';
+import {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
 import {
   Link,
   useNavigate,
   useParams,
 } from 'react-router';
 
+import { UserContext } from '../../contexts/UserContext';
+
 import {
   deleteOrder,
   deleteOrderItem,
   getOrder,
   getOrderItems,
+  updateOrder,
 } from '../../services/orderService';
 
 import './OrderDetails.css';
 
+
 const OrderDetails = () => {
   const { orderId } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const [order, setOrder] = useState(null);
   const [items, setItems] = useState([]);
+  const [status, setStatus] = useState('');
   const [message, setMessage] = useState('');
+
 
   const loadOrder = async () => {
     try {
@@ -29,18 +41,21 @@ const OrderDetails = () => {
 
       setOrder(orderData);
       setItems(itemData);
+      setStatus(orderData.status);
     } catch (err) {
       setMessage(err.message);
     }
   };
 
+
   useEffect(() => {
     loadOrder();
   }, [orderId]);
 
+
   const handleDeleteItem = async (itemId) => {
     const confirmed = window.confirm(
-      'Are you sure you want to remove this item?'
+      'Remove this item from the order?'
     );
 
     if (!confirmed) {
@@ -55,9 +70,10 @@ const OrderDetails = () => {
     }
   };
 
+
   const handleDeleteOrder = async () => {
     const confirmed = window.confirm(
-      'Are you sure you want to delete this order?'
+      'Cancel this order?'
     );
 
     if (!confirmed) {
@@ -72,6 +88,34 @@ const OrderDetails = () => {
     }
   };
 
+
+  const handleStatusUpdate = async (evt) => {
+    evt.preventDefault();
+
+    try {
+      const updated = await updateOrder(
+        orderId,
+        { status }
+      );
+
+      setOrder(updated);
+      setStatus(updated.status);
+      setMessage('');
+    } catch (err) {
+      setMessage(err.message);
+    }
+  };
+
+
+  const formatStatus = (value) => {
+    return value
+      ?.replaceAll('_', ' ')
+      .replace(/\b\w/g, (letter) =>
+        letter.toUpperCase()
+      );
+  };
+
+
   if (message && !order) {
     return (
       <main className="order-details-page">
@@ -81,6 +125,7 @@ const OrderDetails = () => {
       </main>
     );
   }
+
 
   if (!order) {
     return (
@@ -92,8 +137,10 @@ const OrderDetails = () => {
     );
   }
 
+
   return (
     <main className="order-details-page">
+
       <Link
         to="/orders"
         className="order-details-back"
@@ -101,10 +148,15 @@ const OrderDetails = () => {
         ← Back to Orders
       </Link>
 
+
       <section className="order-details-layout">
+
         <div className="order-details-main">
+
           <section className="order-details-heading">
+
             <div className="order-details-heading-top">
+
               <div>
                 <p className="order-details-label">
                   BUNYAN Marketplace
@@ -114,15 +166,20 @@ const OrderDetails = () => {
               </div>
 
               <span className="order-details-status">
-                {order.status}
+                {formatStatus(order.status)}
               </span>
+
             </div>
 
+
             <p>
-              View the materials included in this order
-              and manage the order details.
+              {user?.role === 'supplier'
+                ? 'Review the ordered materials and update the order as it is prepared.'
+                : 'View your materials and track the current order status.'}
             </p>
+
           </section>
+
 
           {message && (
             <p className="order-details-message">
@@ -130,7 +187,9 @@ const OrderDetails = () => {
             </p>
           )}
 
+
           <section className="order-items-section">
+
             <div className="order-items-header">
               <div>
                 <p>Order Contents</p>
@@ -138,9 +197,11 @@ const OrderDetails = () => {
               </div>
 
               <span>
-                {items.length} {items.length === 1 ? 'item' : 'items'}
+                {items.length}{' '}
+                {items.length === 1 ? 'item' : 'items'}
               </span>
             </div>
+
 
             {items.length === 0 ? (
               <div className="order-items-empty">
@@ -148,11 +209,13 @@ const OrderDetails = () => {
               </div>
             ) : (
               <div className="order-items-list">
+
                 {items.map((item, index) => (
                   <article
                     key={item.id}
                     className="order-item-card"
                   >
+
                     <div className="order-item-number">
                       {String(index + 1).padStart(2, '0')}
                     </div>
@@ -169,24 +232,41 @@ const OrderDetails = () => {
                       <strong>{item.quantity}</strong>
                     </div>
 
-                    <button
-                      type="button"
-                      className="order-item-remove"
-                      onClick={() =>
-                        handleDeleteItem(item.id)
-                      }
-                    >
-                      Remove
-                    </button>
+                    <div className="order-item-details">
+                      <span>Unit Price</span>
+                      <strong>
+                        {item.unit_price} BHD
+                      </strong>
+                    </div>
+
+                    {user?.role === 'client' &&
+                      order.status === 'pending' && (
+                        <button
+                          type="button"
+                          className="order-item-remove"
+                          onClick={() =>
+                            handleDeleteItem(item.id)
+                          }
+                        >
+                          Remove
+                        </button>
+                      )}
+
                   </article>
                 ))}
+
               </div>
             )}
+
           </section>
+
         </div>
 
+
         <aside className="order-details-sidebar">
+
           <div className="order-summary-card">
+
             <p className="order-summary-label">
               Order Summary
             </p>
@@ -198,40 +278,88 @@ const OrderDetails = () => {
 
             <div>
               <span>Status</span>
-              <strong>{order.status}</strong>
+              <strong>
+                {formatStatus(order.status)}
+              </strong>
             </div>
 
             <div>
               <span>Total</span>
-              <strong>{order.total_price} BHD</strong>
+              <strong>
+                {order.total_price} BHD
+              </strong>
             </div>
 
             <div>
               <span>Items</span>
               <strong>{items.length}</strong>
             </div>
+
           </div>
 
-          <div className="order-details-actions">
-            <Link
-              to={`/orders/${order.id}/edit`}
-              className="order-edit-button"
-            >
-              Edit Order
-            </Link>
 
-            <button
-              type="button"
-              className="order-delete-button"
-              onClick={handleDeleteOrder}
+          {user?.role === 'supplier' && (
+            <form
+              className="order-status-form"
+              onSubmit={handleStatusUpdate}
             >
-              Delete Order
-            </button>
-          </div>
+              <label htmlFor="order-status">
+                Update Order Status
+              </label>
+
+              <select
+                id="order-status"
+                value={status}
+                onChange={(evt) =>
+                  setStatus(evt.target.value)
+                }
+              >
+                <option value="pending">
+                  Pending
+                </option>
+
+                <option value="processing">
+                  Processing
+                </option>
+
+                <option value="ready">
+                  Ready
+                </option>
+
+                <option value="completed">
+                  Completed
+                </option>
+              </select>
+
+              <button type="submit">
+                Save Status
+              </button>
+            </form>
+          )}
+
+
+          {user?.role === 'client' &&
+            order.status === 'pending' && (
+              <div className="order-details-actions">
+
+                <button
+                  type="button"
+                  className="order-delete-button"
+                  onClick={handleDeleteOrder}
+                >
+                  Cancel Order
+                </button>
+
+              </div>
+            )}
+
         </aside>
+
       </section>
+
     </main>
   );
 };
+
 
 export default OrderDetails;
