@@ -427,3 +427,227 @@
     height: 230px;
   }
 }
+
+/* PROJECT COLLABORATION */
+
+.project-collaboration {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--charcoal);
+}
+
+.project-collaboration-heading {
+  margin-bottom: 22px;
+}
+
+.project-collaboration-heading p {
+  margin: 0 0 5px;
+  color: var(--burgundy);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-collaboration-heading h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.project-collaboration-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+}
+
+.project-workspace-panel {
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.project-workspace-panel h3 {
+  margin: 0 0 18px;
+  font-size: 1rem;
+}
+
+.project-team-list {
+  border-top: 1px solid var(--border);
+}
+
+.project-member-row {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-member-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.project-member-main strong {
+  display: block;
+  color: var(--charcoal);
+  font-size: 0.76rem;
+}
+
+.project-member-main p {
+  margin: 4px 0 0;
+  color: var(--gray);
+  font-size: 0.64rem;
+}
+
+.project-member-status {
+  padding: 5px 8px;
+  background: var(--pink-light);
+  color: var(--burgundy);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-member-status.approved {
+  background: var(--charcoal);
+  color: white;
+}
+
+.project-member-note {
+  margin-top: 10px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+  color: var(--gray);
+  font-size: 0.65rem;
+  line-height: 1.6;
+}
+
+.project-coordination-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.project-coordination-form label {
+  color: var(--charcoal);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.project-coordination-form input,
+.project-coordination-form textarea,
+.project-coordination-form select {
+  width: 100%;
+  padding: 11px 12px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  outline: none;
+}
+
+.project-coordination-form textarea {
+  min-height: 85px;
+}
+
+.project-coordination-form input:focus,
+.project-coordination-form textarea:focus,
+.project-coordination-form select:focus {
+  border-color: var(--burgundy);
+}
+
+.project-coordination-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.project-coordination-button {
+  padding: 11px 16px;
+  background: var(--burgundy);
+  color: white;
+  border-radius: 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.project-approval-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 14px;
+  background: white;
+  border: 1px solid var(--burgundy);
+  border-radius: 7px;
+  color: var(--burgundy);
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+.project-approval-button.approved {
+  background: var(--burgundy);
+  color: white;
+}
+
+.project-meeting {
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
+}
+
+.project-meeting span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gray);
+  font-size: 0.57rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-meeting strong {
+  display: block;
+  color: var(--charcoal);
+  font-size: 0.78rem;
+}
+
+.project-meeting p {
+  margin: 5px 0 0;
+  font-size: 0.65rem;
+}
+
+.project-meeting-link {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 9px 13px;
+  background: var(--charcoal);
+  color: white;
+  font-size: 0.63rem;
+  font-weight: 700;
+}
+
+.project-shared-note {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.project-shared-note span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--burgundy);
+  font-size: 0.57rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.project-shared-note p {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .project-collaboration-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-coordination-row {
+    grid-template-columns: 1fr;
+  }
+}
