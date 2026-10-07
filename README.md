@@ -270,3 +270,6 @@ Future improvements for BUNYAN could include:
 ---
 
 ## Attributions
+Some images used in BUNYAN were created for the project using AI tools.
+
+---
