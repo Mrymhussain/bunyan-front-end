@@ -1,5 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
+import {
+  useNavigate,
+  useParams,
+} from 'react-router';
+
+import { UserContext } from '../../contexts/UserContext';
 
 import {
   getServiceRequest,
@@ -8,20 +18,20 @@ import {
 
 import '../Services/ServiceRequestForm.css';
 
+
 const EditServiceRequest = () => {
   const { requestId } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const [message, setMessage] = useState('');
 
   const [formData, setFormData] = useState({
-    specialist_id: '',
-    service_category_id: '',
     description: '',
     location: '',
     preferred_date: '',
-    status: '',
   });
+
 
   useEffect(() => {
     const loadRequest = async () => {
@@ -29,14 +39,11 @@ const EditServiceRequest = () => {
         const request = await getServiceRequest(requestId);
 
         setFormData({
-          specialist_id: request.specialist_id,
-          service_category_id: request.service_category_id,
           description: request.description || '',
           location: request.location || '',
           preferred_date: request.preferred_date
             ? request.preferred_date.slice(0, 16)
             : '',
-          status: request.status,
         });
       } catch (err) {
         setMessage(err.message);
@@ -46,27 +53,23 @@ const EditServiceRequest = () => {
     loadRequest();
   }, [requestId]);
 
-  const handleChange = (evt) => {
-    setMessage('');
 
+  const handleChange = (evt) => {
     setFormData({
       ...formData,
       [evt.target.name]: evt.target.value,
     });
   };
 
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     try {
-      await updateServiceRequest(requestId, {
-        specialist_id: Number(formData.specialist_id),
-        service_category_id: Number(formData.service_category_id),
-        description: formData.description,
-        location: formData.location,
-        preferred_date: formData.preferred_date,
-        status: formData.status,
-      });
+      await updateServiceRequest(
+        requestId,
+        formData
+      );
 
       navigate(`/service-requests/${requestId}`);
     } catch (err) {
@@ -74,14 +77,27 @@ const EditServiceRequest = () => {
     }
   };
 
+
+  if (user?.role !== 'client') {
+    return (
+      <main className="service-request-form-page">
+        <p className="service-request-form-message">
+          Only the client can edit this request.
+        </p>
+      </main>
+    );
+  }
+
+
   return (
     <main className="service-request-form-page">
+
       <section className="service-request-form-header">
         <p className="service-request-form-label">
-          Manage Service
+          Service Request
         </p>
 
-        <h1>Edit Service Request</h1>
+        <h1>Edit Request</h1>
 
         <p>
           Update the job details, location,
@@ -89,17 +105,21 @@ const EditServiceRequest = () => {
         </p>
       </section>
 
+
       <section className="service-request-form-card">
+
         {message && (
           <p className="service-request-form-message">
             {message}
           </p>
         )}
 
+
         <form
           className="service-request-form"
           onSubmit={handleSubmit}
         >
+
           <div className="service-request-form-field">
             <label htmlFor="description">
               Job Description
@@ -110,13 +130,14 @@ const EditServiceRequest = () => {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              placeholder="Describe the work you need..."
               rows="5"
               required
             />
           </div>
 
+
           <div className="service-request-form-row">
+
             <div className="service-request-form-field">
               <label htmlFor="location">
                 Location
@@ -128,10 +149,10 @@ const EditServiceRequest = () => {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                placeholder="Service location"
                 required
               />
             </div>
+
 
             <div className="service-request-form-field">
               <label htmlFor="preferred_date">
@@ -147,9 +168,12 @@ const EditServiceRequest = () => {
                 required
               />
             </div>
+
           </div>
 
+
           <div className="service-request-form-actions">
+
             <button
               type="submit"
               className="service-request-form-submit"
@@ -167,11 +191,16 @@ const EditServiceRequest = () => {
             >
               Cancel
             </button>
+
           </div>
+
         </form>
+
       </section>
+
     </main>
   );
 };
+
 
 export default EditServiceRequest;

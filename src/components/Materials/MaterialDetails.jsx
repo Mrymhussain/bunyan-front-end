@@ -218,7 +218,8 @@ const MaterialDetails = () => {
             </div>
           </div>
 
-          {user?.role === 'supplier' && (
+          {user?.role === 'supplier' &&
+            material.supplier_id === user.id && (
             <div className="material-details-actions">
               <Link
                 to={`/materials/${material.id}/edit`}

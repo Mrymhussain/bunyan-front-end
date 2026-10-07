@@ -16,14 +16,22 @@ const Materials = () => {
     const loadMaterials = async () => {
       try {
         const data = await getMaterials();
-        setMaterials(data);
+        if (user?.role === 'supplier') {
+          setMaterials(
+            data.filter(
+              (material) => material.supplier_id === user.id
+            )
+          );
+        } else {
+          setMaterials(data);
+        }
       } catch (err) {
         setMessage(err.message);
       }
     };
 
     loadMaterials();
-  }, []);
+  }, [user]);
 
   return (
     <main className="materials-page">
@@ -33,7 +41,11 @@ const Materials = () => {
             BUNYAN Materials
           </p>
 
-          <h1>Building Materials</h1>
+          <h1>
+            {user?.role === 'supplier'
+              ? 'My Materials'
+              : 'Building Materials'}
+          </h1>
 
           <p>
             Browse materials from suppliers for your

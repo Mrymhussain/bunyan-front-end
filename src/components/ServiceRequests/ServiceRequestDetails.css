@@ -257,3 +257,35 @@
     padding: 24px 20px;
   }
 }
+
+.service-request-status-form {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.service-request-status-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.service-request-status-form select {
+  width: 100%;
+  padding: 11px 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  background: var(--background);
+}
+
+.service-request-status-form button {
+  width: 100%;
+  padding: 11px;
+  border: 0;
+  background: var(--burgundy);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
