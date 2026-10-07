@@ -31,7 +31,6 @@ import NewProject from './components/Projects/NewProject';
 import ProjectDetails from './components/Projects/ProjectDetails';
 import Projects from './components/Projects/Projects';
 
-import EditReview from './components/Reviews/EditReview';
 import ReviewForm from './components/Reviews/ReviewForm';
 import Reviews from './components/Reviews/Reviews';
 
@@ -206,10 +205,6 @@ const App = () => {
           element={user ? <ReviewForm /> : <Landing />}
         />
 
-        <Route
-          path="/reviews/:reviewId/edit"
-          element={user ? <EditReview /> : <Landing />}
-        />
       </Routes>
     </>
   );

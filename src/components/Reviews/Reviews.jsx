@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 import {
   deleteReview,
@@ -9,6 +9,8 @@ import {
 import './Reviews.css';
 
 const Reviews = () => {
+  const { user } = useContext(UserContext);
+
   const [reviews, setReviews] = useState([]);
   const [message, setMessage] = useState('');
 
@@ -49,11 +51,20 @@ const Reviews = () => {
           BUNYAN Community
         </p>
 
-        <h1>My Reviews</h1>
+        <h1>
+          {user?.role === 'admin'
+            ? 'Reviews'
+            : user?.role === 'client'
+              ? 'My Reviews'
+              : 'My Feedback'}
+        </h1>
 
         <p>
-          View and manage the feedback you have shared
-          with professionals on BUNYAN.
+          {user?.role === 'admin'
+            ? 'View and manage feedback shared across BUNYAN.'
+            : user?.role === 'client'
+              ? 'View the feedback you have shared with professionals on BUNYAN.'
+              : 'View feedback shared by clients about your work on BUNYAN.'}
         </p>
       </section>
 
@@ -114,22 +125,17 @@ const Reviews = () => {
                 </div>
               </div>
 
-              <div className="review-card-actions">
-                <Link
-                  to={`/reviews/${review.id}/edit`}
-                  className="review-edit-link"
-                >
-                  Edit Review
-                </Link>
-
-                <button
-                  type="button"
-                  className="review-delete-button"
-                  onClick={() => handleDelete(review.id)}
-                >
-                  Delete
-                </button>
-              </div>
+              {user?.role === 'admin' && (
+                <div className="review-card-actions">
+                  <button
+                    type="button"
+                    className="review-delete-button"
+                    onClick={() => handleDelete(review.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
             </article>
           ))}
         </section>
