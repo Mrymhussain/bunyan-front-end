@@ -29,6 +29,7 @@ import Professionals from './components/Professionals/Professionals';
 
 import NewProject from './components/Projects/NewProject';
 import ProjectDetails from './components/Projects/ProjectDetails';
+import EditProject from './components/Projects/EditProject';
 import Projects from './components/Projects/Projects';
 
 import ReviewForm from './components/Reviews/ReviewForm';
@@ -203,6 +204,12 @@ const App = () => {
         <Route
           path="/reviews/new/:userId"
           element={user ? <ReviewForm /> : <Landing />}
+        />
+
+      
+        <Route
+          path="/projects/:projectId/edit"
+          element={<EditProject />}
         />
 
       </Routes>
