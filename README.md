@@ -4,17 +4,21 @@
 
 BUNYAN is an engineering and property services platform that brings clients, engineers, specialists, and building-material suppliers together in one place.
 
-A client can use the platform to start a full engineering project involving areas such as architecture, civil engineering, electrical/MEP, and interior design. They can also request a consultation with an engineer, find a specialist for a smaller job, browse building materials, place orders, and follow the progress of their requests.
+A client can use the platform to start a full engineering project, request a consultation with an engineer, find a specialist for a smaller job, browse building materials, place orders, and follow the progress of their requests.
 
-The aim of BUNYAN is to make the process of building, renovating, or finding the right service easier by having the main services in one platform.
+BUNYAN also provides different dashboards and permissions for clients, engineers, specialists, suppliers, and administrators.
+
+The aim of BUNYAN is to make the process of building, renovating, and finding engineering or property services easier by bringing the main services together in one platform.
 
 ---
 
 ## Back-End Application
 
-The FastAPI back-end and API endpoints can be viewed here:
+The FastAPI back-end and API can be viewed here:
 
-[BUNYAN Back-End](https://github.com/Mrymhussain/bunyan-back-end)
+[BUNYAN Back-End Repository](https://github.com/Mrymhussain/bunyan-back-end)
+
+[Deployed Back-End](https://bunyan-back-end.onrender.com)
 
 ---
 
@@ -22,7 +26,7 @@ The FastAPI back-end and API endpoints can be viewed here:
 
 ### Deployed App
 
-Deployment link will be added once the project is deployed.
+[BUNYAN Live Application](https://bunyan-front-end.onrender.com)
 
 ### Wireframes
 
@@ -48,11 +52,12 @@ The ERD shows the main entities in the system and how they are related.
 
 ![BUNYAN ERD](./assets/bunyan-erd.png)
 
-The main entities planned for the system are:
+The main entities in the system are:
 
 - User
 - Project
 - ProjectMember
+- ProjectUpdate
 - Consultation
 - ServiceRequest
 - ServiceCategory
@@ -65,7 +70,7 @@ The main entities planned for the system are:
 
 ## Component Hierarchy
 
-The component hierarchy shows how the front-end application is planned and how the main pages and components are connected.
+The component hierarchy shows how the front-end application is organized and how the main pages and components are connected.
 
 ![BUNYAN Component Hierarchy](./assets/component-hierarchy.png)
 
@@ -79,55 +84,92 @@ The component hierarchy shows how the front-end application is planned and how t
 - As a user, I want to sign in so I can access my account.
 - As a user, I want to sign out when I finish using the application.
 - As a user, I want to view and update my profile.
+- As a user, I want to see a dashboard based on my role.
 
 ### Projects
 
-- As a client, I want to start a new project.
-- As a client, I want to enter the details of my project.
-- As a client, I want to choose the engineering services needed for my project.
+- As a client, I want to create a project request with the details of my project.
 - As a client, I want to view all of my projects.
-- As a client, I want to view the status and progress of a project.
-- As a client, I want to edit my own project.
-- As a client, I want to see the professionals working on my project.
+- As a client, I want to view the status and progress of my project.
+- As a client, I want to edit the request details of my own project.
+- As a client, I want to see the engineers assigned to my project.
+- As an admin, I want to view all projects.
+- As an admin, I want to assign engineers to a project.
+- As an admin, I want to remove engineers from a project.
+- As an engineer, I want to view the projects assigned to me.
+- As an engineer, I want to update the progress and status of an assigned project.
+
+### Project Room
+
+- As a client, I want to view project updates from the engineering team.
+- As a client, I want to post updates inside my project.
+- As an assigned engineer, I want to post updates inside the project room.
+- As an assigned engineer, I want to approve my own engineering discipline.
+- As an engineer, I want to add an approval note for my discipline.
+- As an admin, I want to monitor the project room and engineering team.
+- As a project member, I want to view the shared project meeting details.
+- As an engineer or admin, I want to update the project meeting information and meeting link.
 
 ### Professionals
 
 - As a client, I want to browse engineers and specialists.
-- As a client, I want to search for a professional by specialty.
+- As a client, I want to view professionals based on their specialty.
 - As a client, I want to view a professional's profile before requesting a service.
 - As a client, I want to view ratings and reviews for professionals.
 
 ### Consultations
 
 - As a client, I want to request a consultation with an engineer.
-- As a client, I want to choose a preferred date and time for the consultation.
+- As a client, I want to choose the consultation details and preferred time.
+- As a client, I want to view my consultation requests.
 - As a client, I want to view the status of my consultation.
-- As an engineer, I want to view consultation requests sent to me.
+- As an engineer, I want to view consultation requests assigned to me.
 - As an engineer, I want to update the status of a consultation.
+- As an admin, I want to view consultation requests across the platform.
 
 ### Services
 
-- As a client, I want to browse services for smaller jobs.
-- As a client, I want to find a specialist for a specific service.
-- As a client, I want to submit a service request.
+- As a client, I want to browse available service categories.
+- As a client, I want to find a specialist for a smaller property job.
+- As a client, I want to submit a service request to a specialist.
+- As a client, I want to view and update the details of my service request.
 - As a client, I want to follow the status of my service request.
-- As a specialist, I want to view requests assigned to me.
-- As a specialist, I want to update the status of a request.
+- As a specialist, I want to view service requests assigned to me.
+- As a specialist, I want to accept and update the status of assigned requests.
+- As an admin, I want to view service requests across the platform.
 
-### Materials and Orders
+### Materials
 
 - As a client, I want to browse building materials.
-- As a client, I want to view the price and details of a material.
-- As a client, I want to place an order for materials.
-- As a client, I want to follow the status of my order.
-- As a supplier, I want to add and manage materials.
-- As a supplier, I want to view and update orders.
+- As a client, I want to view the price, stock, and details of a material.
+- As a supplier, I want to add materials to the marketplace.
+- As a supplier, I want to edit my own materials.
+- As a supplier, I want to delete my own materials.
+- As a supplier, I want to view the materials I supply.
+
+### Orders
+
+- As a client, I want to place an order for building materials.
+- As a client, I want to view my orders.
+- As a client, I want to view the status of an order.
+- As a client, I want to cancel a pending order.
+- As a supplier, I want to view orders for my materials.
+- As a supplier, I want to update an order from pending through its processing stages.
+- As an admin, I want to view orders across the platform.
 
 ### Reviews
 
-- As a client, I want to leave a rating and review.
-- As a client, I want to edit my own review.
-- As a client, I want to delete my own review.
+- As a client, I want to leave a rating and review for a professional.
+- As an engineer or specialist, I want to view feedback received from clients.
+- As an admin, I want to view reviews across the platform.
+- As an admin, I want to remove a review when necessary.
+
+### Admin
+
+- As an admin, I want to view activity across the main parts of the platform.
+- As an admin, I want to manage project teams.
+- As an admin, I want to monitor projects, consultations, service requests, materials, orders, and reviews.
+- As an admin, I want to access an admin dashboard that gives me an overview of the system.
 
 ---
 
@@ -143,14 +185,14 @@ The component hierarchy shows how the front-end application is planned and how t
 | `/profile/edit` | Edit Profile |
 | `/projects` | Projects |
 | `/projects/new` | Create Project |
-| `/projects/:projectId` | Project Details |
+| `/projects/:projectId` | Project Details / Project Room |
 | `/projects/:projectId/edit` | Edit Project |
-| `/professionals` | Engineers and Specialists |
+| `/professionals` | Professionals |
 | `/engineers/:engineerId` | Engineer Profile |
 | `/engineers/:engineerId/consultation` | Request Consultation |
 | `/consultations` | Consultations |
 | `/consultations/:consultationId` | Consultation Details |
-| `/services` | Services and Materials |
+| `/services` | Services |
 | `/specialists/:specialistId` | Specialist Profile |
 | `/specialists/:specialistId/request` | Request Service |
 | `/service-requests` | Service Requests |
@@ -167,18 +209,23 @@ The component hierarchy shows how the front-end application is planned and how t
 
 ## Wireframes
 
-The main screens planned for BUNYAN are:
+The main screens planned for BUNYAN included:
 
 1. Home
 2. Sign Up
 3. Sign In
-4. What Do You Need?
-5. Dashboard
+4. Dashboard
+5. Profile
 6. Projects
 7. Create / Edit Project
-8. Project Details
+8. Project Details / Project Room
 9. Professionals
-10. Services & Materials
+10. Consultations
+11. Services
+12. Service Requests
+13. Materials
+14. Orders
+15. Reviews
 
 The wireframes were created using Excalidraw.
 
@@ -186,17 +233,40 @@ The wireframes were created using Excalidraw.
 
 ---
 
-## Tools Used
+## Technologies Used
 
-The tools used so far for planning and setting up the project are:
-
+- JavaScript
+- React
+- Vite
+- HTML
+- CSS
+- Python
+- FastAPI
+- PostgreSQL
+- SQLAlchemy
+- Pydantic
+- JWT Authentication
+- Alembic
+- REST API
 - Git
 - GitHub
-- Visual Studio Code
 - Excalidraw
+- Render
+- Neon
+
+---
+
+## Next Steps
+
+Future improvements for BUNYAN could include:
+
+- Real-time notifications for project and request updates.
+- In-app messaging between clients and professionals.
+- File and document sharing inside the Project Room.
+- Online payment support for services and material orders.
+- More advanced search and filtering for professionals and materials.
+- Email notifications for consultations, meetings, and order updates.
 
 ---
 
 ## Attributions
-
-External resources that require attribution will be added here during development.
