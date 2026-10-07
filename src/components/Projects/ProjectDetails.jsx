@@ -71,6 +71,15 @@ const ProjectDetails = () => {
         </span>
       </section>
 
+      {project.image_url && (
+        <section className="project-details-image">
+          <img
+            src={project.image_url}
+            alt={project.title}
+          />
+        </section>
+      )}
+
       <section className="project-details-layout">
         <div className="project-details-main">
           <div className="project-details-section">

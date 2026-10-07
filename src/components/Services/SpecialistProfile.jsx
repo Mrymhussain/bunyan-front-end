@@ -55,7 +55,14 @@ const SpecialistProfile = () => {
 
       <section className="specialist-profile-hero">
         <div className="specialist-profile-avatar">
-          {specialist.name?.charAt(0).toUpperCase()}
+          {specialist.image_url ? (
+            <img
+              src={specialist.image_url}
+              alt={specialist.name}
+            />
+          ) : (
+            specialist.name?.charAt(0).toUpperCase()
+          )}
         </div>
 
         <div className="specialist-profile-heading">

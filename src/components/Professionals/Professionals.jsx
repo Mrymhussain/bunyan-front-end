@@ -65,9 +65,16 @@ const Professionals = () => {
             >
               <div className="professional-card-top">
                 <div className="professional-avatar">
-                  {professional.name
-                    ?.charAt(0)
-                    .toUpperCase()}
+                  {professional.image_url ? (
+                    <img
+                      src={professional.image_url}
+                      alt={professional.name}
+                    />
+                  ) : (
+                    professional.name
+                      ?.charAt(0)
+                      .toUpperCase()
+                  )}
                 </div>
 
                 <span className="professional-specialty">

@@ -349,3 +349,27 @@
     width: 100%;
   }
 }
+
+.material-details-image {
+  width: 100%;
+  height: 340px;
+  margin: 0 0 24px;
+  overflow: hidden;
+  background: var(--pink-light);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.material-details-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 650px) {
+  .material-details-image {
+    height: 220px;
+  }
+}

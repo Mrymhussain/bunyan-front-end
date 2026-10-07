@@ -105,9 +105,16 @@ const Services = () => {
               >
                 <div className="specialist-card-top">
                   <div className="specialist-avatar">
-                    {specialist.name
-                      ?.charAt(0)
-                      .toUpperCase()}
+                    {specialist.image_url ? (
+                      <img
+                        src={specialist.image_url}
+                        alt={specialist.name}
+                      />
+                    ) : (
+                      specialist.name
+                        ?.charAt(0)
+                        .toUpperCase()
+                    )}
                   </div>
 
                   <span className="specialist-badge">

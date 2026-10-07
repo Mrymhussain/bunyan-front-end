@@ -96,6 +96,19 @@ const Projects = () => {
               key={project.id}
               className="project-card"
             >
+              <div className="project-card-image">
+                {project.image_url ? (
+                  <img
+                    src={project.image_url}
+                    alt={project.title}
+                  />
+                ) : (
+                  <div className="project-card-image-fallback">
+                    BUNYAN
+                  </div>
+                )}
+              </div>
+
               <div className="project-card-top">
                 <span className="project-number">
                   {String(index + 1).padStart(2, '0')}

@@ -17,6 +17,7 @@ const EditProfile = () => {
     email: user?.email || '',
     phone: user?.phone || '',
     specialty: user?.specialty || '',
+    image_url: user?.image_url || '',
   });
 
   const handleChange = (evt) => {
@@ -37,7 +38,7 @@ const EditProfile = () => {
         email: formData.email,
         phone: formData.phone,
         specialty: formData.specialty,
-        role: user.role,
+        image_url: formData.image_url,
       });
 
       setUser(updatedUser);
@@ -137,6 +138,23 @@ const EditProfile = () => {
               </div>
             )}
           </div>
+
+          {user?.role !== 'client' && (
+            <div className="edit-profile-field">
+              <label htmlFor="image_url">
+                Profile Image
+              </label>
+
+              <input
+                type="text"
+                id="image_url"
+                name="image_url"
+                value={formData.image_url}
+                onChange={handleChange}
+                placeholder="/images/profile-name.png"
+              />
+            </div>
+          )}
 
           <div className="edit-profile-role">
             <span>Account Role</span>

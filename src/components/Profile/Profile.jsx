@@ -34,7 +34,14 @@ const Profile = () => {
         <div className="profile-card">
           <div className="profile-identity">
             <div className="profile-avatar">
-              {initial}
+              {user.image_url ? (
+                <img
+                  src={user.image_url}
+                  alt={user.name}
+                />
+              ) : (
+                initial
+              )}
             </div>
 
             <div>

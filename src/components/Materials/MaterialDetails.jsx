@@ -107,6 +107,15 @@ const MaterialDetails = () => {
         ← Back to Materials
       </Link>
 
+      {material.image_url && (
+        <section className="material-details-image">
+          <img
+            src={material.image_url}
+            alt={material.name}
+          />
+        </section>
+      )}
+
       <section className="material-details-layout">
         <div className="material-details-main">
           <div className="material-details-heading">

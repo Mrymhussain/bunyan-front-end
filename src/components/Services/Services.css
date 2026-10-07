@@ -280,3 +280,14 @@
       grid-template-columns: 1fr;
     }
   }
+.specialist-avatar {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.specialist-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}

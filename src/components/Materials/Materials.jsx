@@ -85,6 +85,19 @@ const Materials = () => {
               key={material.id}
               className="material-card"
             >
+              <div className="material-card-image">
+                {material.image_url ? (
+                  <img
+                    src={material.image_url}
+                    alt={material.name}
+                  />
+                ) : (
+                  <div className="material-card-image-fallback">
+                    BUNYAN
+                  </div>
+                )}
+              </div>
+
               <div className="material-card-top">
                 <span className="material-number">
                   {String(index + 1).padStart(2, '0')}

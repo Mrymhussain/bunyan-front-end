@@ -55,7 +55,14 @@ const EngineerProfile = () => {
 
       <section className="engineer-profile-hero">
         <div className="engineer-profile-avatar">
-          {engineer.name?.charAt(0).toUpperCase()}
+          {engineer.image_url ? (
+            <img
+              src={engineer.image_url}
+              alt={engineer.name}
+            />
+          ) : (
+            engineer.name?.charAt(0).toUpperCase()
+          )}
         </div>
 
         <div className="engineer-profile-heading">
