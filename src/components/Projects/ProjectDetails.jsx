@@ -597,7 +597,7 @@ const ProjectDetails = () => {
                         evt.target.value
                       )
                     }
-                    placeholder="Example: Civil Engineering"
+                    placeholder="Enter discipline"
                   />
 
                   <button
